@@ -140,7 +140,13 @@
   .case.ghost .who{font-size:30px;font-weight:900;color:var(--indigo)}
   .blk{margin-top:30px}
   .blk:first-child{margin-top:16px}
-  .blk-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:12px 0 10px;border-bottom:3px solid var(--bc)}
+  .blk-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;width:100%;padding:12px 0 10px;border:none;border-bottom:3px solid var(--bc);background:none;text-align:left;cursor:pointer;font:inherit;color:inherit}
+  .blk-h:focus-visible{outline:2px solid var(--mid);outline-offset:4px}
+  .blk-h .chev{margin-left:auto;align-self:center;width:30px;height:30px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);color:var(--ink);transition:transform .2s}
+  .blk-h .chev svg{width:15px;height:15px}
+  .blk-h[aria-expanded="false"] .chev{transform:rotate(-90deg)}
+  .blk-h:hover .chev{border-color:var(--bc)}
+  .blk .cases[hidden]{display:none}
   .blk-h h3{font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(20px,3.4vw,26px);line-height:1.05;color:var(--ink)}
   .blk-h .bn{font-family:'Space Mono',monospace;font-size:12px;color:var(--mid);text-transform:uppercase;letter-spacing:.06em}
   .blk-h .bn b{color:var(--bc);font-size:15px}
@@ -485,6 +491,15 @@ function ghost(){
   </article>`;
 }
 
+// Secciones plegables: todas abiertas al entrar; se recuerda lo cerrado mientras se filtra
+const CERRADOS = new Set();
+document.addEventListener("click", e=>{
+  const b = e.target.closest(".blk-h"); if(!b) return;
+  const open = b.getAttribute("aria-expanded")!=="true";
+  b.setAttribute("aria-expanded", open);
+  b.nextElementSibling.hidden = !open;
+  open ? CERRADOS.delete(b.dataset.blk) : CERRADOS.add(b.dataset.blk);
+});
 function render(){
   const q = norm($("q").value.trim()), t=$("fTipo").value, f=$("fFirma").value, e=$("fEstado").value;
   const list = D.filter(d => (!t||d.tipo===t) && (!f||(f==="-"?!d.firma:d.firma===f)) && (!e||d.est===e) && (!q||norm(d.q+" "+d.delito).includes(q)));
@@ -502,8 +517,9 @@ function render(){
     const n = list.filter(d=>b.tipos.includes(d.tipo)).length;
     const ghostHere = b.tipos[0]==="sexual" && showGhost;
     if(!n && !ghostHere) return "";
-    return `<div class="blk" style="--bc:${b.c}"><div class="blk-h"><h3>${b.t}</h3><span class="bn"><b>${n}</b> ${n===1?"caso":"casos"}${b.extra||""}</span></div>
-      <div class="cases">${b.tipos.map(grp).join("")}${ghostHere?ghost():""}</div></div>`;
+    const open = !CERRADOS.has(b.t);
+    return `<div class="blk" style="--bc:${b.c}"><button class="blk-h" type="button" aria-expanded="${open}" data-blk="${b.t}"><h3>${b.t}</h3><span class="bn"><b>${n}</b> ${n===1?"caso":"casos"}${b.extra||""}</span><span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      <div class="cases"${open?"":" hidden"}>${b.tipos.map(grp).join("")}${ghostHere?ghost():""}</div></div>`;
   }).join("");
   $("cases").innerHTML = html || `<div class="empty">No hay casos con esos filtros.</div>`;
   $("countRow").textContent = `${list.length} ${list.length===1?"caso":"casos"}` + (showGhost?` · más ${SIN_IDENTIFICAR} sin identificar`:"");
