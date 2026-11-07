@@ -157,7 +157,7 @@
   .blk-body[hidden]{display:none}
   .ori{font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 8px;border-radius:6px;line-height:1.35}
   .ori-ministerio{background:var(--ink);color:#fff}
-  .ori-suprema{background:#ecebf3;color:#5d587c}
+  .ori-suprema,.ori-apelaciones{background:#ecebf3;color:#5d587c}
   .ori-nd{background:transparent;color:#8a84a8;border:1px dashed #cfcae3}
   .why{background:#fff;border:1px solid var(--line);border-left:5px solid var(--alert);border-radius:10px;padding:18px 20px;margin-top:14px}
   .why h4{font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;text-transform:uppercase;font-size:20px;color:var(--ink);letter-spacing:.02em}
@@ -338,7 +338,7 @@
     <div class="methodbox">
       <div><h4>Fuentes</h4><p>Cada caso, hecho y cifra enlaza a la nota de prensa de la que sale. Citamos a BioBioChile, CIPER, CNN Chile, Ex-Ante, Interferencia, La Tercera, Reportajes T13 y The Clinic. Las fotos son del Gobierno de Chile (Wikimedia Commons y Ministerio de Justicia). El Gobierno no ha publicado los decretos completos.</p></div>
       <div><h4>Víctimas primero</h4><p>En delitos sexuales contra menores no publicamos nombres de condenados, comunas ni parentesco con la víctima. Las iniciales se toman de la prensa que identificó cada caso.</p></div>
-      <div><h4>Orden judicial o decisión propia</h4><p>Marcamos «por orden de la Corte Suprema» solo cuando la prensa informa un fallo que obligó a conceder la rebaja. Que un caso haya pasado por tribunales no basta: muchos fallos solo ordenaban revisar la solicitud. En los otros delitos marcamos el origen cuando la prensa informa cómo se concedió la rebaja; si no, la ficha dice «Origen no informado».</p></div>
+      <div><h4>Orden judicial o decisión propia</h4><p>Marcamos «por orden» de la Corte Suprema o de una Corte de Apelaciones solo cuando la prensa informa un fallo que obligó a conceder la rebaja. Que un caso haya pasado por tribunales no basta: muchos fallos solo ordenaban revisar la solicitud. En los otros delitos marcamos el origen cuando la prensa informa cómo se concedió la rebaja; si no, la ficha dice «Origen no informado».</p></div>
       <div><h4>Liberado no es lo mismo que rebajado</h4><p>Cada ficha marca «En libertad» solo si una fuente lo confirma. «Sigue preso», «Volvió a prisión» y «Sin confirmar» quedan fuera del contador principal.</p></div>
       <div><h4>Lo que falta</h4><p>De las 56 rebajas por delitos sexuales contra menores, la prensa ha identificado <span id="nIdent">44</span>. Las <span id="nFalta">12</span> restantes aparecerán a medida que se conozcan.</p></div>
     </div>
@@ -428,7 +428,7 @@ const D = [
   S("J.A.V.","Abuso sexual (dos condenas)",27,"Silva","bb33"),
   S("F.Q.V.","Abuso sexual de menor de 14 años",9,"Rabat","bb33"),
   S("G.G.J.","Abuso sexual de menor de 14 años",6,"Rabat","bb33"),
-  S("G.R.R.","Violación y abuso sexual de menor de 14 años",30,"Mira","bb33",{g:"Gendarmería evaluó alto su riesgo de reincidencia."}),
+  S("G.R.R.","Violación y abuso sexual de menor de 14 años",30,"Mira","bb33",{g:"Gendarmería evaluó alto su riesgo de reincidencia.",ori:"apelaciones"}),
   // BioBioChile, 3 nov 2026 (10 casos más; según el medio, por orden de la Corte Suprema)
   S("E.G.A.","Abuso sexual reiterado de menor de 14 años",null,"Rabat","bb43",{fd:"13 mar"}),
   S("J.L.M.","Abuso sexual de menores de 14 años",3,"Rabat","bb43",{fd:"13 mar"}),
@@ -474,7 +474,9 @@ const SIN_IDENTIFICAR = 56 - D.filter(d=>d.tipo==="sexual").length;
 // Origen de la rebaja (solo delitos sexuales identificados). Fuente: BioBioChile, 3 nov 2026:
 // los 10 del 3 nov fueron por orden de la Corte Suprema; en los 33 del 26 oct el ministerio actuó «por decisión propia».
 // J.S.O. (Interferencia, 4 nov): la Seremi envió la solicitud y el ministerio la concedió; no hubo fallo que lo ordenara.
-D.forEach(d=>{ if(d.tipo==="sexual") d.ori = d.f==="bb43" ? "suprema" : "ministerio"; });
+// G.R.R. (BioBío, 29 oct): de los 33, «solo en un caso Justicia estuvo obligada a otorgar el beneficio por orden de
+// la Corte de Apelaciones de Valparaíso». Es el decreto firmado por Mira (lo confirman Reportea y la Subsecretaría de DD.HH.).
+D.forEach(d=>{ if(d.tipo==="sexual" && !d.ori) d.ori = d.f==="bb43" ? "suprema" : "ministerio"; });
 // Otros delitos: «ministerio» solo donde la prensa informa que el ministerio concedió sin orden judicial de hacerlo.
 //  · Narcos (Interferencia, 5 y 6 nov): «En ninguno se opuso el ministerio»; todos invocan la «doctrina Rabat».
 //  · Tren de Aragua (Interferencia, 27 oct): «sin un rechazo inicial por parte del ministro».
@@ -483,7 +485,7 @@ D.forEach(d=>{ if(d.tipo==="sexual") d.ori = d.f==="bb43" ? "suprema" : "ministe
 // El resto: «Origen no informado».
 const ORI_MIN = ["Massimiliano Beltrami","Patricio Salas Villar","José Zúñiga Argel","Franyorkin Aramburu Hernández","Winder Marott Morán","Jhonder Ollarves Berbesi","César Acuña Luengo"];
 D.forEach(d=>{ if(d.tipo!=="sexual") d.ori = (d.tipo==="drogas" || ORI_MIN.includes(d.q)) ? "ministerio" : "nd"; });
-const ORI = {ministerio:"Decisión del Ministerio, sin orden de conceder", suprema:"Por orden de la Corte Suprema", nd:"Origen no informado"};
+const ORI = {ministerio:"Decisión del Ministerio, sin orden de conceder", suprema:"Por orden de la Corte Suprema", apelaciones:"Por orden de la Corte de Apelaciones", nd:"Origen no informado"};
 
 // ===== CRONOLOGÍA =====
 // k: true = hito clave (punto rojo)
@@ -583,16 +585,16 @@ document.addEventListener("click", e=>{
 });
 function porque(){
   const sx = D.filter(d=>d.tipo==="sexual");
-  const nm = sx.filter(d=>d.ori==="ministerio").length, ns = sx.filter(d=>d.ori==="suprema").length;
+  const nm = sx.filter(d=>d.ori==="ministerio").length, ns = sx.filter(d=>d.ori==="suprema"||d.ori==="apelaciones").length;
   return `<div class="why">
     <h4>¿Lo obligó la Corte Suprema?</h4>
     <div class="why-n">
       <div class="k1"><b>${nm}</b><span>fueron decisión del Ministerio, sin una orden judicial de conceder la rebaja</span></div>
-      <div><b>${ns}</b><span>se dieron por orden de la Corte Suprema, después de que el beneficio se negara</span></div>
+      <div><b>${ns}</b><span>se dieron por orden de un tribunal, después de que el beneficio se negara</span></div>
       <div><b>${SIN_IDENTIFICAR}</b><span>sin información: la prensa aún no los identifica</span></div>
     </div>
     <p>El ministro Rabat sostiene que 36 de los 56 casos «pasaron por tribunales». Pero esos fallos ordenaban revisar las solicitudes o pronunciarse en un plazo, no conceder la rebaja.</p>
-    <div class="s"><a href="${F.bb43.u}" target="_blank" rel="noopener">BioBioChile</a> · <a href="https://www.t13.cl/noticia/ex-ante/politica/la-nueva-defensa-rabat-ministro-justicia-sostiene-36-56-rebajas-condenas-pasaro-27-10-2026" target="_blank" rel="noopener">Ex-Ante</a> · <a href="https://www.ciperchile.cl/2026/11/04/fallos-de-cortes-de-apelaciones-establecen-que-rabat-si-podia-rechazar-las-rebajas-de-condenas/" target="_blank" rel="noopener">CIPER</a> · <a href="${F.iPA.u}" target="_blank" rel="noopener">Interferencia</a></div>
+    <div class="s"><a href="${F.bb43.u}" target="_blank" rel="noopener">BioBioChile</a> · <a href="https://www.biobiochile.cl/noticias/nacional/chile/2026/10/29/fernando-rabat-y-oficialismo-informacion-erronea-boric.shtml" target="_blank" rel="noopener">BioBioChile (29 oct)</a> · <a href="https://www.t13.cl/noticia/ex-ante/politica/la-nueva-defensa-rabat-ministro-justicia-sostiene-36-56-rebajas-condenas-pasaro-27-10-2026" target="_blank" rel="noopener">Ex-Ante</a> · <a href="https://www.ciperchile.cl/2026/11/04/fallos-de-cortes-de-apelaciones-establecen-que-rabat-si-podia-rechazar-las-rebajas-de-condenas/" target="_blank" rel="noopener">CIPER</a> · <a href="${F.iPA.u}" target="_blank" rel="noopener">Interferencia</a></div>
   </div>`;
 }
 function render(){
