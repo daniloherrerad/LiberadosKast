@@ -255,7 +255,7 @@
           <h3>José Antonio Kast</h3>
           <p>Reconoció el error el 26 de octubre, pero ratificó a Rabat. Desde Roma emplazó a la oposición a presentar la acusación constitucional.</p>
           <q>La asumí yo, porque soy el Presidente de la República</q>
-          <div class="src">Sobre la responsabilidad política, 4 nov · <a href="https://radiopaulina.cl/2026/11/04/kast-ratifica-a-ministro-fernando-rabat-en-su-cargo-y-emplaza-a-la-oposicion-a-presentar-la-acusacion-constitucional" target="_blank" rel="noopener">Radio Paulina</a></div>
+          <div class="src">Sobre la responsabilidad política, 3 nov · <a href="https://www.theclinic.cl/2026/11/03/la-responsabilidad-la-asumi-yo-kast-ratifica-a-rabat-en-su-cargo-y-desafia-a-la-oposicion-a-presentar-la-acusacion-constitucional/" target="_blank" rel="noopener">The Clinic</a></div>
         </div>
       </article>
       <article class="person">
@@ -321,7 +321,7 @@
       <h2>Cómo se arma este registro</h2>
     </div>
     <div class="methodbox">
-      <div><h4>Fuentes</h4><p>Cada caso viene de una nota de prensa enlazada en su ficha: BioBioChile, Interferencia, CNN Chile, Radio U. de Chile y otros medios. El Gobierno no ha publicado los decretos completos.</p></div>
+      <div><h4>Fuentes</h4><p>Cada caso, hecho y cifra enlaza a la nota de prensa de la que sale. Citamos a BioBioChile, CIPER, CNN Chile, Ex-Ante, Interferencia, La Tercera, Reportajes T13 y The Clinic. Las fotos son del Gobierno de Chile, vía Wikimedia Commons. El Gobierno no ha publicado los decretos completos.</p></div>
       <div><h4>Víctimas primero</h4><p>En delitos sexuales contra menores no publicamos nombres de condenados, comunas ni parentesco con la víctima. Las iniciales se toman de la prensa que identificó cada caso.</p></div>
       <div><h4>Liberado no es lo mismo que rebajado</h4><p>Cada ficha marca «En libertad» solo si una fuente lo confirma. «Sigue preso» y «Sin confirmar» quedan fuera del contador principal.</p></div>
       <div><h4>Orden judicial o decisión propia</h4><p>Marcamos «por orden de la Corte Suprema» solo cuando la prensa informa un fallo que obligó a conceder la rebaja. Que un caso haya pasado por tribunales no basta: muchos fallos solo ordenaban revisar la solicitud. En los otros delitos no hay información sobre el origen.</p></div>
@@ -348,7 +348,7 @@ const F = {
   bbOtros:{m:"BioBioChile", u:"https://www.biobiochile.cl/especial/bbcl-investiga/noticias/articulos/2026/10/28/narco-de-la-mafia-italiana-y-neonazi-homicida-estos-son-los-otros-favorecidos-por-rabat-y-silva.shtml"},
   bbTDA:{m:"BioBioChile", u:"https://www.biobiochile.cl/noticias/nacional/chile/2026/10/27/nuevo-flanco-para-rabat-decretos-dejaron-libres-a-extorsionadores-que-decian-ser-del-tren-de-aragua.shtml"},
   cnnPP:{m:"CNN Chile", u:"https://www.cnnchile.com/pais/rebajas-condenas-punta-peuco-ministro-justicia-fernando-rabat-secuestro-tormentos/"},
-  uchDrogas:{m:"Radio U. de Chile", u:"https://radio.uchile.cl/2026/11/05/rebajas-de-condena-a-extranjeros-por-droga-el-nuevo-flanco-de-la-doctrina-rabat/"}
+  uchDrogas:{m:"Interferencia", u:"https://interferencia.cl/articulos/hasta-con-una-tonelada-de-droga-los-decretos-de-rabat-que-rebajaron-condenas-narcos"}
 };
 
 // ===== CASOS =====
@@ -418,10 +418,10 @@ const D = [
   {tipo:"robo",q:"Jhonder Ollarves Berbesi",sub:true,delito:"Robo con intimidación y porte de armas; extorsionaba a migrantes diciendo ser del Tren de Aragua",m:3,firma:"Silva",fd:"7 sep",est:"libre",g:"Salió el 10 de septiembre. No fue expulsado.",f:"bbTDA"},
   {tipo:"ddhh",q:"Miguel Arias Navarrete",delito:"Excarabinero, secuestro calificado de Justo Flores Martínez (1973)",m:9,firma:"Rabat",est:"libre",g:"Cumplía en Punta Peuco. Su salida se adelantó del 14 de diciembre al 14 de marzo.",f:"cnnPP"},
   {tipo:"ddhh",q:"Manuel Cabezas Pérez",delito:"Exintegrante de la FACh, torturas reiteradas a dos detenidos en la Base Aérea El Bosque",m:8,firma:"Rabat",est:"libre",g:"Cumplía en Punta Peuco. Su salida se adelantó del 28 de noviembre al 28 de marzo.",f:"cnnPP"},
-  {tipo:"drogas",q:"Jhoel Ramos Antesana",delito:"Narcotráfico: transporte de 867 kilos de marihuana, entre otras drogas (2021)",m:3,firma:"",fd:"12 may",est:"libre",g:"Salió dos días después del decreto.",f:"uchDrogas"},
+  {tipo:"drogas",q:"Jhoel Ramos Antesana",delito:"Narcotráfico: transporte de 867 kilos de marihuana, entre otras drogas (2021)",m:3,firma:"",fd:"12 may",est:"sinconf",g:"El decreto fijó su salida para dos días después.",f:"uchDrogas"},
   {tipo:"drogas",q:"Fredy Orlas Heredia",sub:true,delito:"Narcotráfico: 52 kilos de pasta base (2021)",m:6,firma:"Silva",fd:"1 jun",est:"sinconf",g:"Gendarmería evaluó alto su riesgo de reincidencia y la Comisión de Libertad Condicional le negó la salida por unanimidad.",f:"uchDrogas"},
-  {tipo:"drogas",q:"Wilber Tenajas Orellana",sub:true,delito:"Narcotráfico: 291,5 kilos de marihuana",m:7,firma:"Silva",est:"sinconf",f:"uchDrogas"},
-  {tipo:"drogas",q:"Estela Cocha Tito",sub:true,delito:"Narcotráfico",m:11,firma:"Silva",est:"sinconf",f:"uchDrogas"},
+  {tipo:"drogas",q:"Wilber Tenajas Orellana",sub:true,delito:"Narcotráfico: 291,5 kilos de marihuana, junto a otros detenidos",m:7,firma:"Silva",est:"sinconf",f:"uchDrogas"},
+  {tipo:"drogas",q:"Estela Cocha Tito",sub:true,delito:"Narcotráfico: 25 kilos de marihuana, junto a otra detenida",m:11,firma:"Silva",fd:"13 jul",est:"sinconf",f:"uchDrogas"},
   {tipo:"drogas",q:"José Luis Liscano Bermúdez",delito:"Narcotráfico: 32,7 kilos de ketamina (2021)",m:null,firma:"Rabat",est:"libre",f:"uchDrogas"},
   {tipo:"drogas",q:"Víctor Mora Araya",delito:"Narcotráfico: 32,7 kilos de ketamina (2021)",m:null,firma:"Rabat",est:"libre",f:"uchDrogas"},
   {tipo:"drogas",q:"Cristhian Oblitas Uscamayta",delito:"Narcotráfico: 103,4 kilos de marihuana",m:null,firma:"",est:"sinconf",f:"uchDrogas"},
@@ -449,9 +449,9 @@ const T = [
   {d:"30 oct", h:"Cae el subsecretario Silva", m:"Es removido tras publicar, sin avisar al ministro, un video sobre las rebajas.", s:[["La Tercera","https://www.latercera.com/politica/noticia/subsecretario-de-justicia-luis-silva-es-removido-de-su-cargo-en-medio-de-polemica-por-rebajas-de-condenas-y-tras-publicar-video-sin-informar/"]]},
   {d:"2 nov", k:true, h:"Rabat, imputado", m:"La Fiscalía confirma que el ministro figura como imputado por presunta prevaricación administrativa.", s:[["BioBioChile","https://www.biobiochile.cl/noticias/nacional/chile/2026/11/02/ministro-rabat-figura-como-imputado-en-causa-por-prevaricacion-administrativa-confirma-fiscalia.shtml"]]},
   {d:"3 nov", h:"Ya son 43 los identificados", m:"BioBioChile identifica a otros 10 beneficiados. Según el medio, en esos 10 casos hubo orden de la Corte Suprema.", s:[["BioBioChile","https://www.biobiochile.cl/especial/bbcl-investiga/noticias/reportajes/2026/11/03/suben-los-pederastas-identificados10-de-43-fueron-beneficiados-por-orden-de-la-corte-suprema.shtml"]]},
-  {d:"4 nov", h:"Las cortes dicen que podía rechazar; Kast lo ratifica desde Roma", m:"CIPER revisa fallos en que los tribunales respaldaron los rechazos del ministerio. Desde Roma, Kast mantiene a Rabat y emplaza a la oposición a presentar la acusación constitucional.", s:[["CIPER","https://www.ciperchile.cl/2026/11/04/fallos-de-cortes-de-apelaciones-establecen-que-rabat-si-podia-rechazar-las-rebajas-de-condenas/"],["Radio Paulina","https://radiopaulina.cl/2026/11/04/kast-ratifica-a-ministro-fernando-rabat-en-su-cargo-y-emplaza-a-la-oposicion-a-presentar-la-acusacion-constitucional"]]},
-  {d:"5 nov", h:"Al menos 115 extranjeros condenados por drogas", m:"Interferencia identifica rebajas a extranjeros condenados por narcotráfico, varios detenidos en la frontera norte. En ninguno el ministerio se opuso.", s:[["Radio U. de Chile","https://radio.uchile.cl/2026/11/05/rebajas-de-condena-a-extranjeros-por-droga-el-nuevo-flanco-de-la-doctrina-rabat/"]]},
-  {d:"5 – 6 nov", h:"La acusación constitucional toma forma", m:"La oposición prepara una acusación de tres capítulos: las rebajas a agresores sexuales de menores, los beneficios a condenados por violaciones a los DD.HH. y la información entregada a otros poderes del Estado. Aún no tiene fecha de presentación.", s:[["El Clarín","https://www.elclarin.cl/2026/11/06/caso-rabat-rebajas-narcotraficantes-fallos-judiciales/"]]}
+  {d:"4 nov", h:"Las cortes dicen que Rabat sí podía rechazar", m:"CIPER revisa fallos de las Cortes de Apelaciones de Santiago y Valparaíso: en la mayoría solo ordenaban al ministerio pronunciarse en un plazo, no conceder la rebaja.", s:[["CIPER","https://www.ciperchile.cl/2026/11/04/fallos-de-cortes-de-apelaciones-establecen-que-rabat-si-podia-rechazar-las-rebajas-de-condenas/"]]},
+  {d:"5 nov", h:"Al menos 115 extranjeros condenados por drogas", m:"Interferencia identifica rebajas a extranjeros condenados por narcotráfico, varios detenidos en la frontera norte. En ninguno el ministerio se opuso.", s:[["Interferencia","https://interferencia.cl/articulos/hasta-con-una-tonelada-de-droga-los-decretos-de-rabat-que-rebajaron-condenas-narcos"]]},
+  {d:"5 nov", h:"La acusación constitucional toma forma", m:"La oposición define tres capítulos: las rebajas a condenados por delitos sexuales contra menores, los beneficios a condenados por crímenes de lesa humanidad y eventuales faltas a la probidad. Aún no tiene fecha de presentación.", s:[["The Clinic","https://www.theclinic.cl/2026/11/05/la-ofensiva-contra-rabat-entra-en-su-recta-final-oposicion-define-capitulos-del-libelo-y-anuncia-presentacion-en-los-proximos-dias"]]}
 ];
 
 // ===== RENDER =====
