@@ -65,7 +65,7 @@
   .tracker .strip{display:flex;gap:34px;flex-wrap:wrap;margin-top:26px;padding-top:22px;border-top:1px dashed #cdbb94}
   .tracker .strip .sn{font-weight:800;font-size:32px;line-height:1;white-space:nowrap}
   .tracker .strip .sn .su{font-size:20px;font-weight:700}
-  .tracker .strip .sl{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#7a6a4f;margin-top:5px;max-width:20ch}
+  .tracker .strip .sl{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#7a6a4f;margin-top:5px;max-width:24ch}
   .method{font-size:13px;color:#4a4370;margin-top:16px}
 
   /* ===== RESPONSABLES ===== */
@@ -232,9 +232,9 @@
       <div class="cap">condenados en libertad antes de tiempo, confirmados por la prensa</div>
       <div class="strip">
         <div><div class="sn">56</div><div class="sl">rebajas a condenados por delitos sexuales contra menores</div></div>
-        <div><div class="sn" id="sAnios">—</div><div class="sl">de cárcel rebajados en esos casos (<span id="sMeses">—</span> meses)</div></div>
-        <div><div class="sn" id="sRabat">—</div><div class="sl">de esas rebajas identificadas llevan la firma de Rabat</div></div>
-        <div><div class="sn" id="sOtros">—</div><div class="sl">beneficiados por otros delitos</div></div>
+        <div><div class="sn" id="sCasos">—</div><div class="sl">casos identificados: <span id="sDesg">—</span></div></div>
+        <div><div class="sn" id="sAnios">—</div><div class="sl">de cárcel rebajados en los casos con dato (<span id="sMeses">—</span> meses)</div></div>
+        <div><div class="sn" id="sFirmas">—</div><div class="sl">firmas de Rabat, Silva y Mira en los casos identificados</div></div>
       </div>
     </div>
     <p class="method">Una rebaja de condena adelanta la fecha de salida. Solo contamos como liberado a quien la prensa confirmó fuera de la cárcel. Cada caso enlaza a su fuente.</p>
@@ -265,7 +265,7 @@
           <div class="role">Ministro de Justicia y DD.HH.</div>
           <h3>Fernando Rabat</h3>
           <p>La Fiscalía confirmó el 2 de noviembre que figura como imputado por presunta prevaricación administrativa. Sigue en el cargo.</p>
-          <div class="signers"><div><b id="pRabat">—</b>decretos firmados</div><div><b>68</b>votos de la Cámara pidiendo su salida</div></div>
+          <div class="signers"><div><b id="pRabat">—</b>decretos firmados</div><div><b>68</b>diputados pidiendo su salida</div></div>
           <div class="src"><a href="https://www.biobiochile.cl/noticias/nacional/chile/2026/11/02/ministro-rabat-figura-como-imputado-en-causa-por-prevaricacion-administrativa-confirma-fiscalia.shtml" target="_blank" rel="noopener">BioBioChile</a> · <a href="https://www.biobiochile.cl/noticias/nacional/chile/2026/10/28/con-abstenciones-oficialistas-camara-pide-a-kast-la-renuncia-de-rabat-y-subsecretarios-silva-y-mira.shtml" target="_blank" rel="noopener">votación 28 oct</a></div>
         </div>
       </article>
@@ -490,12 +490,17 @@ document.querySelectorAll(".upd-long").forEach(e=>e.textContent=ACTUALIZADO.larg
 const sex = D.filter(d=>d.tipo==="sexual");
 $("bigN").textContent = D.filter(d=>d.est==="libre").length;
 $("nIdent").textContent = 56 - SIN_IDENTIFICAR; $("nFalta").textContent = SIN_IDENTIFICAR;
-const mesesSex = Math.round(sex.reduce((a,d)=>a+(d.m||0),0));
-$("sMeses").textContent = fmt(mesesSex);
-$("sAnios").innerHTML = (mesesSex/12).toLocaleString("es-CL",{maximumFractionDigits:2}) + ' <span class="su">años</span>';
+// Meses rebajados en todos los casos identificados con dato; los años se muestran sin decimales («+64»).
+const mesesTot = Math.round(D.reduce((a,d)=>a+(d.m||0),0));
+$("sMeses").textContent = fmt(mesesTot);
+$("sAnios").innerHTML = "+" + Math.floor(mesesTot/12) + ' <span class="su">años</span>';
+$("sCasos").textContent = D.length;
+const nT = t => D.filter(d=>t.includes(d.tipo)).length;
+$("sDesg").textContent = `${nT(["sexual"])} de abuso de menores, ${nT(["ddhh"])} de DD.HH. y ${D.length-nT(["sexual","ddhh"])} de otros delitos`;
+const nF = f => D.filter(d=>d.firma===f).length;
+$("sFirmas").innerHTML = `${nF("Rabat")}<span class="su"> · </span>${nF("Silva")}<span class="su"> · </span>${nF("Mira")}`;
 const firmas = f => D.filter(d=>d.firma===f).length;
-$("sRabat").textContent = sex.filter(d=>d.firma==="Rabat").length;
-$("sOtros").textContent = D.length - sex.length;
+
 $("pRabat").textContent = firmas("Rabat");
 $("pSilva").textContent = firmas("Silva");
 $("pMira").textContent = firmas("Mira");
