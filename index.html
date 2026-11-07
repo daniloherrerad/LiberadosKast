@@ -211,10 +211,6 @@
     .tracker .cap{font-size:15px}
     .tab{font-size:15px;padding:10px 10px}
   }
-  .builder-toggle{display:flex;width:100%;align-items:center;justify-content:center;gap:9px;font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:15px;color:#fff;background:var(--indigo);border:none;border-radius:10px;padding:16px 22px;cursor:pointer;transition:.15s}
-  .builder-toggle:hover{background:var(--indigo-2)}
-  .builder-toggle .bt-chev{width:16px;height:16px;transition:transform .2s}
-  .builder-toggle[aria-expanded="true"] .bt-chev{transform:rotate(180deg)}
   .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
   .proj{display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px;text-decoration:none;color:var(--ink);transition:.15s}
   .proj:hover{border-color:var(--indigo)}
@@ -356,11 +352,7 @@
       <h2>Otros proyectos de Danilo Herrera</h2>
       <p>Monitoreo del gobierno de José Antonio Kast.</p>
     </div>
-    <button id="projToggle" class="builder-toggle" aria-expanded="false" aria-controls="projBody" style="margin-top:18px">
-      <span id="projToggleTxt">Ver proyectos</span>
-      <svg class="bt-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-    </button>
-    <div id="projBody" hidden>
+    <div id="projBody">
       <div class="proj-grid">
         <a class="proj" href="https://renunciaskast.cl" target="_blank" rel="noopener"><b>Renuncias Kast</b><span>Registro de renuncias, ceses y nombramientos fallidos del gobierno de José Antonio Kast.</span><i>renunciaskast.cl</i></a>
         <a class="proj" href="https://presupuestokast.cl" target="_blank" rel="noopener"><b>Presupuesto Kast</b><span>Análisis comparativo del Presupuesto 2027 de José Antonio Kast.</span><i>presupuestokast.cl</i></a>
@@ -649,13 +641,6 @@ tabs.forEach((t,i)=>{
   t.addEventListener("keydown",e=>{ if(e.key==="ArrowRight"||e.key==="ArrowLeft"){ const n=tabs[(i+(e.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length]; n.focus(); selectTab(n,true);} });
 });
 if(location.hash==="#cronologia") selectTab($("t-crono"),false);
-const projToggle=document.getElementById('projToggle'), projBody=document.getElementById('projBody'), projToggleTxt=document.getElementById('projToggleTxt');
-projToggle.addEventListener('click', ()=>{
-  const show=projBody.hidden;
-  projBody.hidden=!show;
-  projToggle.setAttribute('aria-expanded', show?'true':'false');
-  projToggleTxt.textContent=show?'Ocultar proyectos':'Ver proyectos';
-});
 </script>
 </body>
 </html>
