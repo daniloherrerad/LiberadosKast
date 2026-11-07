@@ -98,7 +98,7 @@
   .tab:focus-visible{outline:2px solid var(--mid);outline-offset:2px}
 
   .sec-head h2{font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(20px,3.6vw,26px);color:var(--indigo);line-height:1}
-  .sec-head p{font-size:14px;color:#4a4370;margin-top:6px;max-width:68ch}
+  .sec-head p{font-size:14px;color:#4a4370;margin-top:6px}
 
   /* ===== CASOS ===== */
   .controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:14px 16px;background:var(--lav);border:1px solid var(--line);border-radius:12px;margin-top:20px}
@@ -151,15 +151,15 @@
   .ori{font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 8px;border-radius:6px;line-height:1.35}
   .ori-ministerio{background:var(--ink);color:#fff}
   .ori-suprema{background:#ecebf3;color:#5d587c}
+  .ori-nd{background:transparent;color:#8a84a8;border:1px dashed #cfcae3}
   .why{background:#fff;border:1px solid var(--line);border-left:5px solid var(--alert);border-radius:10px;padding:18px 20px;margin-top:14px}
   .why h4{font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;text-transform:uppercase;font-size:20px;color:var(--ink);letter-spacing:.02em}
-  .why-n{display:flex;gap:28px;flex-wrap:wrap;margin-top:12px}
-  .why-n div{max-width:24ch}
+  .why-n{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:12px}
   .why-n b{display:block;font-weight:900;font-size:38px;line-height:1;color:var(--ink)}
   .why-n .k1 b{color:var(--alert)}
   .why-n span{display:block;font-size:13px;line-height:1.35;color:#3a3363;margin-top:6px}
   @media(max-width:560px){.why-n{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.why-n b{font-size:30px}.why-n span{font-size:11.5px}}
-  .why p{font-size:13.5px;color:#3a3363;margin-top:14px;max-width:80ch}
+  .why p{font-size:13.5px;color:#3a3363;margin-top:14px}
   .why .s{font-family:'Space Mono',monospace;font-size:11.5px;color:var(--mid);margin-top:8px}
   .why .s a{color:var(--mid)}
   .blk-h h3{font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(20px,3.4vw,26px);line-height:1.05;color:var(--ink)}
@@ -324,8 +324,8 @@
     <div class="methodbox">
       <div><h4>Fuentes</h4><p>Cada caso, hecho y cifra enlaza a la nota de prensa de la que sale. Citamos a BioBioChile, CIPER, CNN Chile, Ex-Ante, Interferencia, La Tercera, Reportajes T13 y The Clinic. Las fotos son del Gobierno de Chile (Wikimedia Commons y Ministerio de Justicia). El Gobierno no ha publicado los decretos completos.</p></div>
       <div><h4>Víctimas primero</h4><p>En delitos sexuales contra menores no publicamos nombres de condenados, comunas ni parentesco con la víctima. Las iniciales se toman de la prensa que identificó cada caso.</p></div>
-      <div><h4>Liberado no es lo mismo que rebajado</h4><p>Cada ficha marca «En libertad» solo si una fuente lo confirma. «Sigue preso» y «Sin confirmar» quedan fuera del contador principal.</p></div>
-      <div><h4>Orden judicial o decisión propia</h4><p>Marcamos «por orden de la Corte Suprema» solo cuando la prensa informa un fallo que obligó a conceder la rebaja. Que un caso haya pasado por tribunales no basta: muchos fallos solo ordenaban revisar la solicitud. En los otros delitos no hay información sobre el origen.</p></div>
+      <div><h4>Orden judicial o decisión propia</h4><p>Marcamos «por orden de la Corte Suprema» solo cuando la prensa informa un fallo que obligó a conceder la rebaja. Que un caso haya pasado por tribunales no basta: muchos fallos solo ordenaban revisar la solicitud. En los otros delitos marcamos el origen cuando la prensa informa cómo se concedió la rebaja; si no, la ficha dice «Origen no informado».</p></div>
+      <div><h4>Liberado no es lo mismo que rebajado</h4><p>Cada ficha marca «En libertad» solo si una fuente lo confirma. «Sigue preso», «Volvió a prisión» y «Sin confirmar» quedan fuera del contador principal.</p></div>
       <div><h4>Lo que falta</h4><p>De las 56 rebajas por delitos sexuales contra menores, la prensa ha identificado <span id="nIdent">44</span>. Las <span id="nFalta">12</span> restantes aparecerán a medida que se conozcan.</p></div>
     </div>
   </div>
@@ -444,7 +444,15 @@ const SIN_IDENTIFICAR = 56 - D.filter(d=>d.tipo==="sexual").length;
 // los 10 del 3 nov fueron por orden de la Corte Suprema; en los 33 del 26 oct el ministerio actuó «por decisión propia».
 // J.S.O. (Interferencia, 4 nov): la Seremi envió la solicitud y el ministerio la concedió; no hubo fallo que lo ordenara.
 D.forEach(d=>{ if(d.tipo==="sexual") d.ori = d.f==="bb43" ? "suprema" : "ministerio"; });
-const ORI = {ministerio:"Decisión del Ministerio, sin orden de conceder", suprema:"Por orden de la Corte Suprema"};
+// Otros delitos: «ministerio» solo donde la prensa informa que el ministerio concedió sin orden judicial de hacerlo.
+//  · Narcos (Interferencia, 5 y 6 nov): «En ninguno se opuso el ministerio»; todos invocan la «doctrina Rabat».
+//  · Tren de Aragua (Interferencia, 27 oct): «sin un rechazo inicial por parte del ministro».
+//  · Beltrami, Salas Villar, Zúñiga (BioBío, 28 oct): los decretos dicen que el ministerio no podía denegarlo.
+//  · Acuña Luengo (BioBío, 22 oct): la Corte solo ordenó pronunciarse, «no ordenó expresamente conceder la rebaja».
+// El resto: «Origen no informado».
+const ORI_MIN = ["Massimiliano Beltrami","Patricio Salas Villar","José Zúñiga Argel","Franyorkin Aramburu Hernández","Winder Marott Morán","Jhonder Ollarves Berbesi","César Acuña Luengo"];
+D.forEach(d=>{ if(d.tipo!=="sexual") d.ori = (d.tipo==="drogas" || ORI_MIN.includes(d.q)) ? "ministerio" : "nd"; });
+const ORI = {ministerio:"Decisión del Ministerio, sin orden de conceder", suprema:"Por orden de la Corte Suprema", nd:"Origen no informado"};
 
 // ===== CRONOLOGÍA =====
 // k: true = hito clave (punto rojo)
