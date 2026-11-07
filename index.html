@@ -63,7 +63,8 @@
   .tracker .big{display:inline-block;font-weight:900;font-size:clamp(100px,18vw,160px);line-height:.8;letter-spacing:-.045em;color:#b3261e;border:clamp(4px,.8vw,7px) solid #b3261e;border-radius:12px;padding:.1em .12em .03em;transform:rotate(-3deg);margin:22px 0 10px 4px}
   .tracker .cap{font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(16px,3.2vw,23px);margin-top:8px;color:#2b2118}
   .tracker .strip{display:flex;gap:34px;flex-wrap:wrap;margin-top:26px;padding-top:22px;border-top:1px dashed #cdbb94}
-  .tracker .strip .sn{font-weight:800;font-size:32px;line-height:1}
+  .tracker .strip .sn{font-weight:800;font-size:32px;line-height:1;white-space:nowrap}
+  .tracker .strip .sn .su{font-size:20px;font-weight:700}
   .tracker .strip .sl{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#7a6a4f;margin-top:5px;max-width:20ch}
   .method{font-size:13px;color:#4a4370;margin-top:16px}
 
@@ -128,7 +129,7 @@
   .case.c-drogas{border-left-color:#c08a1e}.case.c-drogas .bar i{background:#c08a1e}
   .case.c-robo{border-left-color:#2f6690}.case.c-robo .bar i{background:#2f6690}
   .case .gnote{font-size:12.5px;color:var(--warn-ink);background:var(--warn-bg);border-radius:6px;padding:6px 8px}
-  .case .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:8px;border-top:1px solid #ece9f7;font-size:12px}
+  .case .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-top:auto;padding-top:8px;border-top:1px solid #ece9f7;font-size:12px}
   .case .foot a{font-family:'Space Mono',monospace;color:var(--mid);text-decoration:none;border-bottom:1px solid var(--lav-2);font-weight:700}
   .case .foot a:hover{color:var(--indigo)}
   .tag{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase;padding:3px 7px;border-radius:20px;font-weight:700;white-space:nowrap}
@@ -138,6 +139,12 @@
   .case.ghost{border-style:dashed;border-left-style:solid;background:transparent;justify-content:center}
   .case.ghost .who{font-size:30px;font-weight:900;color:var(--indigo)}
   .empty{padding:30px;text-align:center;color:var(--mid);font-size:14px}
+
+  /* Franja para delitos sexuales contra menores */
+  .case.c-sexual{background:#fffafa}
+  .case.c-sexual .top{background:var(--alert);color:#fff;margin:-14px -16px 4px;padding:8px 16px 8px 14px;border-radius:5px 9px 0 0;font-weight:700}
+  .case.c-sexual .top .tag{background:#fff;color:var(--alert-ink)}
+  .case.c-sexual.ghost{background:transparent}
 
   /* ===== TIMELINE ===== */
   .tl{position:relative;padding-left:26px;margin-top:22px}
@@ -198,7 +205,7 @@
       <div class="cap">condenados en libertad antes de tiempo, confirmados por la prensa</div>
       <div class="strip">
         <div><div class="sn">56</div><div class="sl">rebajas a condenados por delitos sexuales contra menores</div></div>
-        <div><div class="sn" id="sMeses">—</div><div class="sl">meses de cárcel rebajados en esos casos</div></div>
+        <div><div class="sn" id="sAnios">—</div><div class="sl">de cárcel rebajados en esos casos (<span id="sMeses">—</span> meses)</div></div>
         <div><div class="sn" id="sRabat">—</div><div class="sl">de esas rebajas identificadas llevan la firma de Rabat</div></div>
         <div><div class="sn" id="sOtros">—</div><div class="sl">beneficiados por otros delitos</div></div>
       </div>
@@ -381,13 +388,13 @@ const D = [
   {tipo:"homicidio",q:"Claudio Faúndez Chacón",delito:"Homicidio en Río Bueno; condenado a 10 años y un día",m:13,firma:"Rabat",est:"sinconf",f:"bbOtros"},
   {tipo:"robo",q:"Franyorkin Aramburu Hernández",delito:"Robo con intimidación y porte de armas; extorsionaba a migrantes diciendo ser del Tren de Aragua",m:9,firma:"Rabat",fd:"6 jul",est:"prision",g:"La Comisión de Libertad Condicional le había negado la salida en 2025. Su salida quedó para el 8 de marzo de 2027.",f:"bbTDA"},
   {tipo:"robo",q:"Winder Marott Morán",delito:"Robo con intimidación y porte de armas; extorsionaba a migrantes diciendo ser del Tren de Aragua",m:3,firma:"Rabat",fd:"4 sep",est:"libre",g:"Salió el 9 de septiembre. No fue expulsado.",f:"bbTDA"},
-  {tipo:"robo",q:"Jhonder Ollarves Berbesi",delito:"Robo con intimidación y porte de armas; extorsionaba a migrantes diciendo ser del Tren de Aragua",m:3,firma:"Silva",fd:"7 sep",est:"libre",g:"Salió el 10 de septiembre. No fue expulsado.",f:"bbTDA"},
-  {tipo:"ddhh",q:"Miguel Arias Navarrete",delito:"Excarabinero, secuestro calificado de Justo Flores Martínez (1973)",m:9,firma:"Rabat",est:"libre",g:"Cumplía en Punta Peuco. Su salida pasó del 14 de diciembre al 14 de marzo.",f:"cnnPP"},
-  {tipo:"ddhh",q:"Manuel Cabezas Pérez",delito:"Exintegrante de la FACh, torturas reiteradas a dos detenidos en la Base Aérea El Bosque",m:8,firma:"Rabat",est:"libre",g:"Cumplía en Punta Peuco. Su salida pasó del 28 de noviembre al 28 de marzo.",f:"cnnPP"},
+  {tipo:"robo",q:"Jhonder Ollarves Berbesi",sub:true,delito:"Robo con intimidación y porte de armas; extorsionaba a migrantes diciendo ser del Tren de Aragua",m:3,firma:"Silva",fd:"7 sep",est:"libre",g:"Salió el 10 de septiembre. No fue expulsado.",f:"bbTDA"},
+  {tipo:"ddhh",q:"Miguel Arias Navarrete",delito:"Excarabinero, secuestro calificado de Justo Flores Martínez (1973)",m:9,firma:"Rabat",est:"libre",g:"Cumplía en Punta Peuco. Su salida se adelantó del 14 de diciembre al 14 de marzo.",f:"cnnPP"},
+  {tipo:"ddhh",q:"Manuel Cabezas Pérez",delito:"Exintegrante de la FACh, torturas reiteradas a dos detenidos en la Base Aérea El Bosque",m:8,firma:"Rabat",est:"libre",g:"Cumplía en Punta Peuco. Su salida se adelantó del 28 de noviembre al 28 de marzo.",f:"cnnPP"},
   {tipo:"drogas",q:"Jhoel Ramos Antesana",delito:"Narcotráfico: transporte de 867 kilos de marihuana, entre otras drogas (2021)",m:3,firma:"",fd:"12 may",est:"libre",g:"Salió dos días después del decreto.",f:"uchDrogas"},
-  {tipo:"drogas",q:"Fredy Orlas Heredia",delito:"Narcotráfico: 52 kilos de pasta base (2021)",m:6,firma:"Silva",fd:"1 jun",est:"sinconf",g:"Gendarmería evaluó alto su riesgo de reincidencia y la Comisión de Libertad Condicional le negó la salida por unanimidad.",f:"uchDrogas"},
-  {tipo:"drogas",q:"Wilber Tenajas Orellana",delito:"Narcotráfico: 291,5 kilos de marihuana",m:7,firma:"Silva",est:"sinconf",f:"uchDrogas"},
-  {tipo:"drogas",q:"Estela Cocha Tito",delito:"Narcotráfico",m:11,firma:"Silva",est:"sinconf",f:"uchDrogas"},
+  {tipo:"drogas",q:"Fredy Orlas Heredia",sub:true,delito:"Narcotráfico: 52 kilos de pasta base (2021)",m:6,firma:"Silva",fd:"1 jun",est:"sinconf",g:"Gendarmería evaluó alto su riesgo de reincidencia y la Comisión de Libertad Condicional le negó la salida por unanimidad.",f:"uchDrogas"},
+  {tipo:"drogas",q:"Wilber Tenajas Orellana",sub:true,delito:"Narcotráfico: 291,5 kilos de marihuana",m:7,firma:"Silva",est:"sinconf",f:"uchDrogas"},
+  {tipo:"drogas",q:"Estela Cocha Tito",sub:true,delito:"Narcotráfico",m:11,firma:"Silva",est:"sinconf",f:"uchDrogas"},
   {tipo:"drogas",q:"José Luis Liscano Bermúdez",delito:"Narcotráfico: 32,7 kilos de ketamina (2021)",m:null,firma:"Rabat",est:"libre",f:"uchDrogas"},
   {tipo:"drogas",q:"Víctor Mora Araya",delito:"Narcotráfico: 32,7 kilos de ketamina (2021)",m:null,firma:"Rabat",est:"libre",f:"uchDrogas"},
   {tipo:"drogas",q:"Cristhian Oblitas Uscamayta",delito:"Narcotráfico: 103,4 kilos de marihuana",m:null,firma:"",est:"sinconf",f:"uchDrogas"},
@@ -418,6 +425,7 @@ const T = [
 
 // ===== RENDER =====
 const TIPOS = {sexual:"Delito sexual contra menores", drogas:"Narcotráfico", homicidio:"Homicidio", femicidio:"Femicidio frustrado", robo:"Robo y armas", ddhh:"Violaciones a los DD.HH."};
+const FIRMANTES = {Rabat:["Fernando Rabat","ministro de Justicia"], Silva:["Luis Silva","subsecretario de Justicia"], Mira:["Pablo Mira","subsecretario de DD.HH."]};
 const ORDEN = ["sexual","ddhh","homicidio","femicidio","drogas","robo"]; // orden de las fichas
 const EST = {libre:"En libertad", prision:"Sigue preso", sinconf:"Sin confirmar"};
 const $ = id => document.getElementById(id);
@@ -427,7 +435,9 @@ document.querySelectorAll(".upd-long").forEach(e=>e.textContent=ACTUALIZADO.larg
 
 const sex = D.filter(d=>d.tipo==="sexual");
 $("bigN").textContent = D.filter(d=>d.est==="libre").length;
-$("sMeses").textContent = fmt(Math.round(sex.reduce((a,d)=>a+(d.m||0),0)));
+const mesesSex = Math.round(sex.reduce((a,d)=>a+(d.m||0),0));
+$("sMeses").textContent = fmt(mesesSex);
+$("sAnios").innerHTML = (mesesSex/12).toLocaleString("es-CL",{maximumFractionDigits:2}) + ' <span class="su">años</span>';
 const firmas = f => D.filter(d=>d.firma===f).length;
 $("sRabat").textContent = sex.filter(d=>d.firma==="Rabat").length;
 $("sOtros").textContent = D.length - sex.length;
@@ -449,15 +459,16 @@ const maxM = 36;
 function card(d,i){
   const src = F[d.f];
   const mtxt = d.mt || (d.m!=null ? `${d.m} ${d.m===1?"mes":"meses"}` : null);
-  const meta = [d.firma ? `Firma: ${d.firma}` : "Firma no informada", d.fd ? `Decreto ${d.fd}` : ""].filter(Boolean).join(" · ");
-  return `<article class="case c-${d.tipo}">
+  const fr = FIRMANTES[d.firma];
+  const meta = (fr ? `Firma: ${esc(fr[0])},<br>${esc(fr[1])}${d.sub&&d.firma==="Silva"?", como ministro (s)":""}` : "Firma no informada") + (d.fd ? `<br>Decreto del ${esc(d.fd)}` : "");
+  return `<article class="case c-${d.tipo}" id="caso-${D.indexOf(d)}">
     <div class="top"><span>${esc(TIPOS[d.tipo])}</span><span class="tag st-${d.est}">${EST[d.est]}</span></div>
     <div class="who ${d.tipo==="sexual"?"ini":""}">${esc(d.q)}</div>
     <div class="crime">${esc(d.delito)}</div>
     <div class="rebaja">${mtxt?`<b>${esc(mtxt.split(" ")[0])}</b><span>${esc(mtxt.split(" ").slice(1).join(" "))} de rebaja</span>`:`<span>Rebaja no informada</span>`}</div>
     ${d.m!=null?`<div class="bar" aria-hidden="true"><i style="width:${Math.min(100,d.m/maxM*100).toFixed(1)}%"></i></div>`:""}
     ${d.g?`<div class="gnote">${esc(d.g)}</div>`:""}
-    <div class="foot"><span>${esc(meta)}</span><a href="${src.u}" target="_blank" rel="noopener">${esc(src.m)}</a></div>
+    <div class="foot"><span>${meta}</span><a href="${src.u}" target="_blank" rel="noopener">${esc(src.m)}</a></div>
   </article>`;
 }
 function ghost(){
@@ -473,11 +484,14 @@ function render(){
   const list = D.filter(d => (!t||d.tipo===t) && (!f||(f==="-"?!d.firma:d.firma===f)) && (!e||d.est===e) && (!q||norm(d.q+" "+d.delito).includes(q)));
   const anyFilter = q||t||f||e;
   const showGhost = !q && (!t||t==="sexual") && !f && !e;
-  const grp = t => list.filter(d=>d.tipo===t).map(card).join("");
+  // Dentro de cada grupo: más meses de rebaja primero; sin dato al final; empate por orden alfabético
+  const byMeses = (a,b) => (b.m??-1)-(a.m??-1) || a.q.localeCompare(b.q,"es");
+  const grp = t => list.filter(d=>d.tipo===t).sort(byMeses).map(card).join("");
   $("cases").innerHTML = grp("sexual") + (showGhost?ghost():"") + ORDEN.slice(1).map(grp).join("") || `<div class="empty">No hay casos con esos filtros.</div>`;
   $("countRow").textContent = `${list.length} ${list.length===1?"caso":"casos"}` + (showGhost?` · más ${SIN_IDENTIFICAR} sin identificar`:"");
   $("btnClear").hidden = !anyFilter;
 }
+
 ["q","fTipo","fFirma","fEstado"].forEach(id=>$(id).addEventListener("input",render));
 $("btnClear").addEventListener("click",()=>{["q","fTipo","fFirma","fEstado"].forEach(id=>$(id).value="");render();});
 render();
