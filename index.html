@@ -146,7 +146,21 @@
   .blk-h .chev svg{width:15px;height:15px}
   .blk-h[aria-expanded="false"] .chev{transform:rotate(-90deg)}
   .blk-h:hover .chev{border-color:var(--bc)}
-  .blk .cases[hidden]{display:none}
+  .blk-body[hidden]{display:none}
+  .ori{font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 8px;border-radius:6px;line-height:1.35}
+  .ori-ministerio{background:var(--ink);color:#fff}
+  .ori-suprema{background:#ecebf3;color:#5d587c}
+  .why{background:#fff;border:1px solid var(--line);border-left:5px solid var(--alert);border-radius:10px;padding:18px 20px;margin-top:14px}
+  .why h4{font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;text-transform:uppercase;font-size:20px;color:var(--ink);letter-spacing:.02em}
+  .why-n{display:flex;gap:28px;flex-wrap:wrap;margin-top:12px}
+  .why-n div{max-width:24ch}
+  .why-n b{display:block;font-weight:900;font-size:38px;line-height:1;color:var(--ink)}
+  .why-n .k1 b{color:var(--alert)}
+  .why-n span{display:block;font-size:13px;line-height:1.35;color:#3a3363;margin-top:6px}
+  @media(max-width:560px){.why-n{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.why-n b{font-size:30px}.why-n span{font-size:11.5px}}
+  .why p{font-size:13.5px;color:#3a3363;margin-top:14px;max-width:80ch}
+  .why .s{font-family:'Space Mono',monospace;font-size:11.5px;color:var(--mid);margin-top:8px}
+  .why .s a{color:var(--mid)}
   .blk-h h3{font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(20px,3.4vw,26px);line-height:1.05;color:var(--ink)}
   .blk-h .bn{font-family:'Space Mono',monospace;font-size:12px;color:var(--mid);text-transform:uppercase;letter-spacing:.06em}
   .blk-h .bn b{color:var(--bc);font-size:15px}
@@ -310,6 +324,7 @@
       <div><h4>Fuentes</h4><p>Cada caso viene de una nota de prensa enlazada en su ficha: BioBioChile, Interferencia, CNN Chile, Radio U. de Chile y otros medios. El Gobierno no ha publicado los decretos completos.</p></div>
       <div><h4>Víctimas primero</h4><p>En delitos sexuales contra menores no publicamos nombres de condenados, comunas ni parentesco con la víctima. Las iniciales se toman de la prensa que identificó cada caso.</p></div>
       <div><h4>Liberado no es lo mismo que rebajado</h4><p>Cada ficha marca «En libertad» solo si una fuente lo confirma. «Sigue preso» y «Sin confirmar» quedan fuera del contador principal.</p></div>
+      <div><h4>Orden judicial o decisión propia</h4><p>Marcamos «por orden de la Corte Suprema» solo cuando la prensa informa un fallo que obligó a conceder la rebaja. Que un caso haya pasado por tribunales no basta: muchos fallos solo ordenaban revisar la solicitud. En los otros delitos no hay información sobre el origen.</p></div>
       <div><h4>Lo que falta</h4><p>De las 56 rebajas por delitos sexuales contra menores, la prensa ha identificado 43. Las 13 restantes aparecerán a medida que se conozcan.</p></div>
     </div>
   </div>
@@ -413,6 +428,10 @@ const D = [
   {tipo:"drogas",q:"Javier Pérez Mamani",delito:"Narcotráfico: 59,9 kilos de marihuana y uno de cocaína",m:null,firma:"",est:"sinconf",f:"uchDrogas"}
 ];
 const SIN_IDENTIFICAR = 56 - D.filter(d=>d.tipo==="sexual").length;
+// Origen de la rebaja (solo delitos sexuales identificados). Fuente: BioBioChile, 3 nov 2026:
+// los 10 del 3 nov fueron por orden de la Corte Suprema; en los 33 del 26 oct el ministerio actuó «por decisión propia».
+D.forEach(d=>{ if(d.tipo==="sexual") d.ori = d.f==="bb43" ? "suprema" : "ministerio"; });
+const ORI = {ministerio:"Decisión del Ministerio, sin orden de conceder", suprema:"Por orden de la Corte Suprema"};
 
 // ===== CRONOLOGÍA =====
 // k: true = hito clave (punto rojo)
@@ -480,6 +499,7 @@ function card(d,i){
     <div class="rebaja">${mtxt?`<b>${esc(mtxt.split(" ")[0])}</b><span>${esc(mtxt.split(" ").slice(1).join(" "))} de rebaja</span>`:`<span>Rebaja no informada</span>`}</div>
     ${d.m!=null?`<div class="bar" aria-hidden="true"><i style="width:${Math.min(100,d.m/maxM*100).toFixed(1)}%"></i></div>`:""}
     ${d.g?`<div class="gnote">${esc(d.g)}</div>`:""}
+    ${d.ori?`<div class="ori ori-${d.ori}">${ORI[d.ori]}</div>`:""}
     <div class="foot"><span>${meta}</span><a href="${src.u}" target="_blank" rel="noopener">${esc(src.m)}</a></div>
   </article>`;
 }
@@ -500,6 +520,20 @@ document.addEventListener("click", e=>{
   b.nextElementSibling.hidden = !open;
   open ? CERRADOS.delete(b.dataset.blk) : CERRADOS.add(b.dataset.blk);
 });
+function porque(){
+  const sx = D.filter(d=>d.tipo==="sexual");
+  const nm = sx.filter(d=>d.ori==="ministerio").length, ns = sx.filter(d=>d.ori==="suprema").length;
+  return `<div class="why">
+    <h4>¿Lo obligó la Corte Suprema?</h4>
+    <div class="why-n">
+      <div class="k1"><b>${nm}</b><span>fueron decisión del Ministerio, sin una orden judicial de conceder la rebaja</span></div>
+      <div><b>${ns}</b><span>se dieron por orden de la Corte Suprema, después de que el beneficio se negara</span></div>
+      <div><b>${SIN_IDENTIFICAR}</b><span>sin información: la prensa aún no los identifica</span></div>
+    </div>
+    <p>El ministro Rabat sostiene que 36 de los 56 casos «pasaron por tribunales». Pero esos fallos ordenaban revisar las solicitudes o pronunciarse en un plazo, no conceder la rebaja.</p>
+    <div class="s"><a href="${F.bb43.u}" target="_blank" rel="noopener">BioBioChile</a> · <a href="https://www.t13.cl/noticia/ex-ante/politica/la-nueva-defensa-rabat-ministro-justicia-sostiene-36-56-rebajas-condenas-pasaro-27-10-2026" target="_blank" rel="noopener">Ex-Ante</a> · <a href="https://www.ciperchile.cl/2026/11/04/fallos-de-cortes-de-apelaciones-establecen-que-rabat-si-podia-rechazar-las-rebajas-de-condenas/" target="_blank" rel="noopener">CIPER</a></div>
+  </div>`;
+}
 function render(){
   const q = norm($("q").value.trim()), t=$("fTipo").value, f=$("fFirma").value, e=$("fEstado").value;
   const list = D.filter(d => (!t||d.tipo===t) && (!f||(f==="-"?!d.firma:d.firma===f)) && (!e||d.est===e) && (!q||norm(d.q+" "+d.delito).includes(q)));
@@ -519,7 +553,7 @@ function render(){
     if(!n && !ghostHere) return "";
     const open = !CERRADOS.has(b.t);
     return `<div class="blk" style="--bc:${b.c}"><button class="blk-h" type="button" aria-expanded="${open}" data-blk="${b.t}"><h3>${b.t}</h3><span class="bn"><b>${n}</b> ${n===1?"caso":"casos"}${b.extra||""}</span><span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-      <div class="cases"${open?"":" hidden"}>${b.tipos.map(grp).join("")}${ghostHere?ghost():""}</div></div>`;
+      <div class="blk-body"${open?"":" hidden"}>${b.tipos[0]==="sexual"?porque():""}<div class="cases">${b.tipos.map(grp).join("")}${ghostHere?ghost():""}</div></div></div>`;
   }).join("");
   $("cases").innerHTML = html || `<div class="empty">No hay casos con esos filtros.</div>`;
   $("countRow").textContent = `${list.length} ${list.length===1?"caso":"casos"}` + (showGhost?` · más ${SIN_IDENTIFICAR} sin identificar`:"");
