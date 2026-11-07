@@ -69,7 +69,7 @@
   .tracker .meta{font-family:'Space Mono',monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#7a6a4f}
   .tracker .big{display:inline-block;font-weight:900;font-size:clamp(100px,18vw,160px);line-height:.8;letter-spacing:-.045em;color:#b3261e;border:clamp(4px,.8vw,7px) solid #b3261e;border-radius:12px;padding:.1em .12em .03em;transform:rotate(-3deg);margin:22px 0 10px 4px}
   .tracker .cap{font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(16px,3.2vw,23px);margin-top:8px;color:#2b2118}
-  .tracker .strip{display:flex;gap:34px;flex-wrap:wrap;margin-top:26px;padding-top:22px;border-top:1px dashed #cdbb94}
+  .tracker .strip{display:grid;grid-template-columns:repeat(3,minmax(0,220px));gap:22px 34px;margin-top:26px;padding-top:22px;border-top:1px dashed #cdbb94}
   .tracker .strip .sn{font-weight:800;font-size:32px;line-height:1;white-space:nowrap}
   .tracker .strip .sn .su{font-size:20px;font-weight:700}
   .tracker .strip .sl{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#7a6a4f;margin-top:5px;max-width:24ch}
@@ -248,7 +248,9 @@
         <div><div class="sn">56</div><div class="sl">rebajas a condenados por delitos sexuales contra menores</div></div>
         <div><div class="sn" id="sCasos">—</div><div class="sl">casos identificados: <span id="sDesg">—</span></div></div>
         <div><div class="sn" id="sAnios">—</div><div class="sl">de cárcel rebajados en los casos con dato (<span id="sMeses">—</span> meses)</div></div>
-        <div><div class="sn" id="sFirmas">—</div><div class="sl">firmas de Rabat, Silva y Mira en los casos identificados</div></div>
+        <div><div class="sn" id="sFRabat">—</div><div class="sl">rebajas firmadas por el ministro Rabat</div></div>
+        <div><div class="sn" id="sFSilva">—</div><div class="sl">rebajas firmadas por el exsubsecretario Silva</div></div>
+        <div><div class="sn" id="sFMira">—</div><div class="sl">rebajas firmadas por el subsecretario Mira</div></div>
       </div>
     </div>
     <p class="method">Una rebaja de condena adelanta la fecha de salida. Solo contamos como liberado a quien la prensa confirmó fuera de la cárcel. Cada caso enlaza a su fuente.</p>
@@ -259,7 +261,7 @@
   <div class="wrap">
     <div class="sec-head">
       <h2>Los responsables</h2>
-      <p>Las rebajas se dan por decreto del Ministerio de Justicia. Firmaron el ministro Fernando Rabat y los subsecretarios Luis Silva y Pablo Mira.</p>
+      <p>Las rebajas se dan por decreto del Ministerio de Justicia. Firmaron el ministro Fernando Rabat, el exsubsecretario Luis Silva y el subsecretario Pablo Mira.</p>
     </div>
     <div class="people">
       <article class="person">
@@ -285,7 +287,7 @@
       <article class="person">
         <div class="ph"><img src="img/trio.jpg" alt="Pablo Mira, Fernando Rabat y Luis Silva" loading="lazy"></div>
         <div class="bd">
-          <div class="role">Subsecretarios</div>
+          <div class="role">Exsubsecretario y subsecretario</div>
           <h3>Luis Silva y Pablo Mira</h3>
           <p>Junto a Rabat en la foto oficial de su llegada al ministerio. Silva fue removido el 30 de octubre tras publicar un video sobre las rebajas sin avisar al ministro.</p>
           <div class="signers"><div><b id="pSilva">—</b>firmó Silva</div><div><b id="pMira">—</b>firmó Mira</div></div>
@@ -511,7 +513,7 @@ const T = [
 
 // ===== RENDER =====
 const TIPOS = {sexual:"Delito sexual contra menores", drogas:"Narcotráfico", homicidio:"Homicidio", femicidio:"Femicidio frustrado", robo:"Robo y armas", ddhh:"Violaciones a los DD.HH."};
-const FIRMANTES = {Rabat:["Fernando Rabat","ministro de Justicia"], Silva:["Luis Silva","subsecretario de Justicia"], Mira:["Pablo Mira","subsecretario de DD.HH."]};
+const FIRMANTES = {Rabat:["Fernando Rabat","ministro de Justicia"], Silva:["Luis Silva","exsubsecretario de Justicia"], Mira:["Pablo Mira","subsecretario de DD.HH."]};
 const ORDEN = ["sexual","ddhh","homicidio","femicidio","drogas","robo"]; // orden de las fichas
 const EST = {libre:"En libertad", prision:"Sigue preso", volvio:"Volvió a prisión", sinconf:"Sin confirmar"};
 const $ = id => document.getElementById(id);
@@ -530,7 +532,7 @@ $("sCasos").textContent = D.length;
 const nT = t => D.filter(d=>t.includes(d.tipo)).length;
 $("sDesg").textContent = `${nT(["sexual"])} de abuso de menores, ${nT(["ddhh"])} de DD.HH. y ${D.length-nT(["sexual","ddhh"])} de otros delitos`;
 const nF = f => D.filter(d=>d.firma===f).length;
-$("sFirmas").innerHTML = `${nF("Rabat")}<span class="su"> · </span>${nF("Silva")}<span class="su"> · </span>${nF("Mira")}`;
+$("sFRabat").textContent = nF("Rabat"); $("sFSilva").textContent = nF("Silva"); $("sFMira").textContent = nF("Mira");
 const firmas = f => D.filter(d=>d.firma===f).length;
 
 $("pRabat").textContent = firmas("Rabat");
