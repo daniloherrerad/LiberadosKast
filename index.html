@@ -138,6 +138,12 @@
   .st-sinconf{background:#ecebf3;color:#5d587c}
   .case.ghost{border-style:dashed;border-left-style:solid;background:transparent;justify-content:flex-start}
   .case.ghost .who{font-size:30px;font-weight:900;color:var(--indigo)}
+  .blk{margin-top:30px}
+  .blk:first-child{margin-top:16px}
+  .blk-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:12px 0 10px;border-bottom:3px solid var(--bc)}
+  .blk-h h3{font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(20px,3.4vw,26px);line-height:1.05;color:var(--ink)}
+  .blk-h .bn{font-family:'Space Mono',monospace;font-size:12px;color:var(--mid);text-transform:uppercase;letter-spacing:.06em}
+  .blk-h .bn b{color:var(--bc);font-size:15px}
   .empty{padding:30px;text-align:center;color:var(--mid);font-size:14px}
 
   /* Franja para delitos sexuales contra menores */
@@ -276,7 +282,7 @@
         <button id="btnClear" class="btn-clear" hidden>Limpiar filtros</button>
       </div>
       <div class="count-row" id="countRow"></div>
-      <div class="cases" id="cases"></div>
+      <div id="cases"></div>
     </div>
 
     <div id="p-crono" role="tabpanel" aria-labelledby="t-crono" hidden>
@@ -487,7 +493,19 @@ function render(){
   // Dentro de cada grupo: más meses de rebaja primero; sin dato al final; empate por orden alfabético
   const byMeses = (a,b) => (b.m??-1)-(a.m??-1) || a.q.localeCompare(b.q,"es");
   const grp = t => list.filter(d=>d.tipo===t).sort(byMeses).map(card).join("");
-  $("cases").innerHTML = grp("sexual") + (showGhost?ghost():"") + ORDEN.slice(1).map(grp).join("") || `<div class="empty">No hay casos con esos filtros.</div>`;
+  const BLOQUES = [
+    {t:"Condenados por abuso y violación de menores", tipos:["sexual"], c:"var(--alert)", extra: showGhost ? ` + ${SIN_IDENTIFICAR} sin identificar` : ""},
+    {t:"Condenados por violaciones a los DD.HH.", tipos:["ddhh"], c:"var(--lh)"},
+    {t:"Homicidas, narcotraficantes y otros delitos", tipos:["homicidio","femicidio","drogas","robo"], c:"var(--indigo)"}
+  ];
+  const html = BLOQUES.map(b=>{
+    const n = list.filter(d=>b.tipos.includes(d.tipo)).length;
+    const ghostHere = b.tipos[0]==="sexual" && showGhost;
+    if(!n && !ghostHere) return "";
+    return `<div class="blk" style="--bc:${b.c}"><div class="blk-h"><h3>${b.t}</h3><span class="bn"><b>${n}</b> ${n===1?"caso":"casos"}${b.extra||""}</span></div>
+      <div class="cases">${b.tipos.map(grp).join("")}${ghostHere?ghost():""}</div></div>`;
+  }).join("");
+  $("cases").innerHTML = html || `<div class="empty">No hay casos con esos filtros.</div>`;
   $("countRow").textContent = `${list.length} ${list.length===1?"caso":"casos"}` + (showGhost?` · más ${SIN_IDENTIFICAR} sin identificar`:"");
   $("btnClear").hidden = !anyFilter;
 }
