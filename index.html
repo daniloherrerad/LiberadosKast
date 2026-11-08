@@ -80,7 +80,6 @@
   .person{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
   .person .ph{aspect-ratio:4/3.4;background:var(--lav);overflow:hidden;position:relative}
   .person .ph img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.15)}
-  .person .ph .stamp{position:absolute;left:12px;bottom:12px;background:var(--alert);color:#fff;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:4px}
   .person .bd{padding:16px 18px 18px;flex:1;display:flex;flex-direction:column}
   .person .role{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid)}
   .person h3{font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;text-transform:uppercase;font-size:21px;color:var(--indigo);line-height:1.05;margin-top:3px}
@@ -260,8 +259,8 @@
 <section style="padding-top:26px">
   <div class="wrap">
     <div class="sec-head">
-      <h2>Los responsables</h2>
-      <p>Las rebajas se dan por decreto del Ministerio de Justicia. Firmaron el ministro Fernando Rabat, el exsubsecretario Luis Silva y el subsecretario Pablo Mira.</p>
+      <h2>Las autoridades</h2>
+      <p>Las rebajas se dan por decreto del Ministerio de Justicia. Cada uno se dicta «por orden del Presidente de la República» (<a href="https://interferencia.cl/articulos/ministerio-de-justicia-y-ddhh-otorgo-56-rebajas-de-condena-delincuentes-sentenciados-por" target="_blank" rel="noopener">Interferencia</a>), una fórmula de delegación de firma: los firma la autoridad del ministerio, no el Presidente. Firmaron el ministro Fernando Rabat, el exsubsecretario Luis Silva y el subsecretario Pablo Mira. En <span id="nOrden">11</span> de los <span id="nIdent2">44</span> casos identificados de delitos sexuales contra menores, la rebaja se dio por orden de un tribunal.</p>
     </div>
     <div class="people">
       <article class="person">
@@ -269,18 +268,18 @@
         <div class="bd">
           <div class="role">Presidente de la República</div>
           <h3>José Antonio Kast</h3>
-          <p>Reconoció el error el 26 de octubre, pero ratificó a Rabat. Desde Roma emplazó a la oposición a presentar la acusación constitucional.</p>
+          <p>Reconoció el error el 26 de octubre y mantuvo a Rabat en el cargo. Llamó a la oposición a presentar la acusación constitucional.</p>
           <q>La asumí yo, porque soy el Presidente de la República</q>
           <div class="src">Sobre la responsabilidad política, 3 nov · <a href="https://www.theclinic.cl/2026/11/03/la-responsabilidad-la-asumi-yo-kast-ratifica-a-rabat-en-su-cargo-y-desafia-a-la-oposicion-a-presentar-la-acusacion-constitucional/" target="_blank" rel="noopener">The Clinic</a></div>
         </div>
       </article>
       <article class="person">
-        <div class="ph"><img src="img/rabat.jpg?v=2" alt="Retrato oficial del ministro de Justicia Fernando Rabat" loading="lazy" style="object-position:50% 22%"><span class="stamp">Imputado</span></div>
+        <div class="ph"><img src="img/rabat.jpg?v=2" alt="Retrato oficial del ministro de Justicia Fernando Rabat" loading="lazy" style="object-position:50% 22%"></div>
         <div class="bd">
           <div class="role">Ministro de Justicia y DD.HH.</div>
           <h3>Fernando Rabat</h3>
-          <p>La Fiscalía confirmó el 2 de noviembre que figura como imputado por presunta prevaricación administrativa. Sigue en el cargo.</p>
-          <div class="signers"><div><b id="pRabat">—</b>decretos firmados</div><div><b>68</b>diputados pidiendo su salida</div></div>
+          <p>La Fiscalía confirmó el 2 de noviembre que figura como imputado por presunta prevaricación administrativa. Se mantiene como ministro.</p>
+          <div class="signers"><div><b id="pRabat">—</b>decretos firmados</div><div><b>68</b>diputados a favor del proyecto de resolución que pide su salida (42 en contra, 7 abstenciones; no vinculante)</div></div>
           <div class="src"><a href="https://www.biobiochile.cl/noticias/nacional/chile/2026/11/02/ministro-rabat-figura-como-imputado-en-causa-por-prevaricacion-administrativa-confirma-fiscalia.shtml" target="_blank" rel="noopener">BioBioChile</a> · <a href="https://www.biobiochile.cl/noticias/nacional/chile/2026/10/28/con-abstenciones-oficialistas-camara-pide-a-kast-la-renuncia-de-rabat-y-subsecretarios-silva-y-mira.shtml" target="_blank" rel="noopener">votación 28 oct</a></div>
         </div>
       </article>
@@ -289,7 +288,7 @@
         <div class="bd">
           <div class="role">Exsubsecretario y subsecretario</div>
           <h3>Luis Silva y Pablo Mira</h3>
-          <p>Junto a Rabat en la foto oficial de su llegada al ministerio. Silva fue removido el 30 de octubre tras publicar un video sobre las rebajas sin avisar al ministro.</p>
+          <p>Silva fue removido el 30 de octubre tras publicar un video sobre las rebajas sin avisar al ministro.</p>
           <div class="signers"><div><b id="pSilva">—</b>firmó Silva</div><div><b id="pMira">—</b>firmó Mira</div></div>
           <div class="src">Firmas de los casos identificados en esta página</div>
         </div>
@@ -500,7 +499,7 @@ const T = [
   {d:"22 oct", h:"También a condenados por crímenes de la dictadura", m:"Justicia informa tres rebajas a condenados por secuestro y torturas: dos reos de Punta Peuco y un exagente de la CNI que cumplía en Colina I.", s:[["BioBioChile","https://www.biobiochile.cl/noticias/nacional/chile/2026/10/22/cesar-acuna-luengo-el-decreto-de-justicia-que-rebajo-pena-a-exagente-cni-condenado-por-ultimos-secuestros-de-la-dictadura.shtml"],["BioBioChile (nombres)","https://www.biobiochile.cl/noticias/nacional/chile/2026/10/26/los-otros-dos-nombres-las-rebajas-condena-que-firmo-rabat-a-condenados-por-secuestro-y-torturas-en-dictadura.shtml"]]},
   {d:"26 oct", k:true, h:"Kast reconoce el error, pero mantiene a Rabat", m:"«El Estado les falló», dice el Presidente sobre las víctimas. Respalda la suspensión de nuevas rebajas en estos casos y anuncia un proyecto de ley. El mismo día, BioBioChile identifica a 33 de los beneficiados, todos en libertad.", s:[["BioBioChile","https://www.biobiochile.cl/noticias/nacional/chile/2026/10/26/kast-asume-responsabilidad-por-rebajas-a-abusadores-pero-ratifica-a-rabat-el-estado-les-fallo.shtml"],["BioBioChile (lista)","https://biobiochile.cl/especial/bbcl-investiga/noticias/reportajes/2026/10/26/lista-33-pederastas-que-recibieron-rebajas-condena-kast.shtml"]]},
   {d:"27 oct", h:"Extorsionadores que decían ser del Tren de Aragua", m:"Se conocen rebajas a tres venezolanos condenados por robo con intimidación y porte de armas. Dos salieron en septiembre sin ser expulsados.", s:[["BioBioChile","https://www.biobiochile.cl/noticias/nacional/chile/2026/10/27/nuevo-flanco-para-rabat-decretos-dejaron-libres-a-extorsionadores-que-decian-ser-del-tren-de-aragua.shtml"]]},
-  {d:"28 oct", k:true, h:"La Cámara pide la salida de Rabat, Silva y Mira", m:"La resolución se aprueba por 68 votos a favor, 42 en contra y 7 abstenciones. No es vinculante. Ese día también se conocen rebajas a homicidas, entre ellos un integrante de un grupo neonazi, y a un narco ligado a la mafia italiana.", s:[["BioBioChile","https://www.biobiochile.cl/noticias/nacional/chile/2026/10/28/con-abstenciones-oficialistas-camara-pide-a-kast-la-renuncia-de-rabat-y-subsecretarios-silva-y-mira.shtml"],["BioBioChile (otros casos)","https://www.biobiochile.cl/especial/bbcl-investiga/noticias/articulos/2026/10/28/narco-de-la-mafia-italiana-y-neonazi-homicida-estos-son-los-otros-favorecidos-por-rabat-y-silva.shtml"]]},
+  {d:"28 oct", k:true, h:"La Cámara pide la salida de Rabat, Silva y Mira", m:"El proyecto de resolución se aprueba por 68 votos a favor, 42 en contra y 7 abstenciones. No es vinculante. Ese día también se conocen rebajas a homicidas, entre ellos un integrante de un grupo neonazi, y a un narco ligado a la mafia italiana.", s:[["BioBioChile","https://www.biobiochile.cl/noticias/nacional/chile/2026/10/28/con-abstenciones-oficialistas-camara-pide-a-kast-la-renuncia-de-rabat-y-subsecretarios-silva-y-mira.shtml"],["BioBioChile (otros casos)","https://www.biobiochile.cl/especial/bbcl-investiga/noticias/articulos/2026/10/28/narco-de-la-mafia-italiana-y-neonazi-homicida-estos-son-los-otros-favorecidos-por-rabat-y-silva.shtml"]]},
   {d:"30 oct", h:"Cae el subsecretario Silva", m:"Es removido tras publicar, sin avisar al ministro, un video sobre las rebajas.", s:[["La Tercera","https://www.latercera.com/politica/noticia/subsecretario-de-justicia-luis-silva-es-removido-de-su-cargo-en-medio-de-polemica-por-rebajas-de-condenas-y-tras-publicar-video-sin-informar/"]]},
   {d:"2 nov", k:true, h:"Rabat, imputado", m:"La Fiscalía confirma que el ministro figura como imputado por presunta prevaricación administrativa.", s:[["BioBioChile","https://www.biobiochile.cl/noticias/nacional/chile/2026/11/02/ministro-rabat-figura-como-imputado-en-causa-por-prevaricacion-administrativa-confirma-fiscalia.shtml"]]},
   {d:"3 nov", h:"Ya son 43 los identificados", m:"BioBioChile identifica a otros 10 beneficiados. Según el medio, en esos 10 casos hubo orden de la Corte Suprema.", s:[["BioBioChile","https://www.biobiochile.cl/especial/bbcl-investiga/noticias/reportajes/2026/11/03/suben-los-pederastas-identificados10-de-43-fueron-beneficiados-por-orden-de-la-corte-suprema.shtml"]]},
@@ -524,6 +523,8 @@ document.querySelectorAll(".upd-long").forEach(e=>e.textContent=ACTUALIZADO.larg
 const sex = D.filter(d=>d.tipo==="sexual");
 $("bigN").textContent = D.filter(d=>d.est==="libre").length;
 $("nIdent").textContent = 56 - SIN_IDENTIFICAR; $("nFalta").textContent = SIN_IDENTIFICAR;
+$("nIdent2").textContent = 56 - SIN_IDENTIFICAR;
+$("nOrden").textContent = D.filter(d=>d.tipo==="sexual"&&(d.ori==="suprema"||d.ori==="apelaciones")).length;
 // Meses rebajados en todos los casos identificados con dato; los años se muestran sin decimales («+64»).
 const mesesTot = Math.round(D.reduce((a,d)=>a+(d.m||0),0));
 $("sMeses").textContent = fmt(mesesTot);
