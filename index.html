@@ -658,7 +658,7 @@ function render(){
       <div class="blk-body"${open?"":" hidden"}>${b.tipos[0]==="sexual"?porque():""}<div class="cases">${b.tipos.map(x=>grp(x)+(x==="drogas"&&ghostD?ghostDrogas():"")).join("")}${ghostHere?ghost():""}</div></div></div>`;
   }).join("");
   $("cases").innerHTML = html || `<div class="empty">No hay casos con esos filtros.</div>`;
-  $("countRow").textContent = `${list.length} ${list.length===1?"caso":"casos"}` + (showGhost?` · más ${SIN_IDENTIFICAR} sin identificar`:"") + (showGhostD?` · y cerca de 100 por drogas`:"");
+  $("countRow").textContent = `${list.length} ${list.length===1?"caso":"casos"}` + (showGhost?` · más ${SIN_IDENTIFICAR} sin identificar por abuso de menores`:"") + (showGhostD?` · y cerca de 100 por drogas`:"");
   $("btnClear").hidden = !anyFilter;
 }
 
