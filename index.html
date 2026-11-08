@@ -138,6 +138,8 @@
   .case .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-top:auto;padding-top:8px;border-top:1px solid #ece9f7;font-size:12px}
   .case .foot a{font-family:'Space Mono',monospace;color:var(--mid);text-decoration:none;border-bottom:1px solid var(--lav-2);font-weight:700}
   .case .foot a:hover{color:var(--indigo)}
+  .case .foot .links{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex:none}
+  .case .foot a.dec{display:inline-flex;align-items:center;gap:4px}
   .tag{display:inline-block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase;padding:3px 7px;border-radius:20px;font-weight:700;white-space:nowrap}
   .st-libre{background:var(--alert-bg);color:var(--alert-ink)}
   .st-prision{background:#dfeee3;color:#22613a}
@@ -337,7 +339,7 @@
     </div>
     <div class="methodbox">
       <div><h4>Fuentes</h4><p>Cada caso, hecho y cifra enlaza a la nota de prensa de la que sale. Citamos a BioBioChile, CIPER, CNN Chile, Ex-Ante, Interferencia, La Tercera, Reportajes T13 y The Clinic. Las fotos son del Gobierno de Chile (Wikimedia Commons y Ministerio de Justicia). El Gobierno no ha publicado los decretos completos.</p></div>
-      <div><h4>Víctimas primero</h4><p>En delitos sexuales contra menores no publicamos nombres de condenados, comunas ni parentesco con la víctima. Las iniciales se toman de la prensa que identificó cada caso.</p></div>
+      <div><h4>Víctimas primero</h4><p>En delitos sexuales contra menores no publicamos nombres de condenados, comunas ni parentesco con la víctima. Las iniciales se toman de la prensa que identificó cada caso. No enlazamos decretos de estos casos para proteger a las víctimas; en otros delitos, el ícono «Decreto» lleva al PDF publicado por Interferencia.</p></div>
       <div><h4>Orden judicial o decisión propia</h4><p>Marcamos «por orden» de la Corte Suprema o de una Corte de Apelaciones solo cuando la prensa informa un fallo que obligó a conceder la rebaja. Que un caso haya pasado por tribunales no basta: muchos fallos solo ordenaban revisar la solicitud. En los otros delitos marcamos el origen cuando la prensa informa cómo se concedió la rebaja; si no, la ficha dice «Origen no informado».</p></div>
       <div><h4>Liberado no es lo mismo que rebajado</h4><p>Cada ficha marca «En libertad» solo si una fuente lo confirma. «Sigue preso», «Volvió a prisión» y «Sin confirmar» quedan fuera del contador principal.</p></div>
       <div><h4>Extranjeros condenados por drogas</h4><p>El «115 de 150» viene de los decretos a los que accedió Interferencia; no es una cifra oficial y el universo es mayor. Esos 115 no entran en el contador ni en las firmas: solo sumamos casos con nombre publicado y firma confirmada por la prensa o el decreto. Las fuentes hablan de decretos de «este año», sin la fecha de cada uno, así que no afirmamos que todos sean de este gobierno.</p></div>
@@ -509,7 +511,7 @@ const T = [
   {d:"4 nov", h:"Las cortes dicen que Rabat sí podía rechazar", m:"CIPER revisa fallos de las Cortes de Apelaciones de Santiago y Valparaíso: en la mayoría solo ordenaban al ministerio pronunciarse en un plazo, no conceder la rebaja.", s:[["CIPER","https://www.ciperchile.cl/2026/11/04/fallos-de-cortes-de-apelaciones-establecen-que-rabat-si-podia-rechazar-las-rebajas-de-condenas/"]]},
   {d:"4 nov", h:"Un caso más, identificado en Magallanes", m:"Interferencia recoge el caso que publicó La Prensa Austral: un condenado por violar y abusar de una niña salió en septiembre tras una rebaja de 18 meses firmada por Silva. Con él, son 44 los identificados.", s:[["Interferencia","https://interferencia.cl/articulos/el-condenado-de-punta-arenas-que-salio-libre-con-una-rebaja-de-pena-y-llevo-la-polemica-de"]]},
   {d:"5 nov", h:"115 de 150 decretos a extranjeros son por drogas", m:"Interferencia revisa 150 decretos de rebaja a extranjeros dictados este año: 115 son por drogas y en ninguno el ministerio se opuso. Al menos 13 beneficiados fueron detenidos en la frontera norte o en rutas que bajan de ella. No es una cifra oficial.", s:[["Interferencia","https://interferencia.cl/articulos/hasta-con-una-tonelada-de-droga-los-decretos-de-rabat-que-rebajaron-condenas-narcos"],["T13","https://www.t13.cl/noticia/politica/rebaja-pena-narcos-condenados-por-cargamentos-hasta-una-tonelada-5-11-2026"]]},
-  {d:"5 nov", h:"La acusación constitucional toma forma", m:"La oposición define tres capítulos: las rebajas a condenados por delitos sexuales contra menores, los beneficios a condenados por crímenes de lesa humanidad y eventuales faltas a la probidad. Aún no tiene fecha de presentación.", s:[["The Clinic","https://www.theclinic.cl/2026/11/05/la-ofensiva-contra-rabat-entra-en-su-recta-final-oposicion-define-capitulos-del-libelo-y-anuncia-presentacion-en-los-proximos-dias"]]},
+  {d:"5 nov", h:"La acusación constitucional toma forma", m:"La oposición define tres capítulos: las rebajas a condenados por delitos sexuales contra menores, los beneficios a condenados por crímenes de lesa humanidad y eventuales faltas a la probidad. La oposición espera presentarla en los próximos días.", s:[["The Clinic","https://www.theclinic.cl/2026/11/05/la-ofensiva-contra-rabat-entra-en-su-recta-final-oposicion-define-capitulos-del-libelo-y-anuncia-presentacion-en-los-proximos-dias"]]},
   {d:"6 nov", h:"Un beneficiado vuelve a caer por tráfico", m:"Un condenado por narcotráfico al que Rabat rebajó seis meses en abril quedó otra vez en prisión preventiva por tráfico el 30 de octubre.", s:[["Interferencia","https://interferencia.cl/articulos/condenado-expulsion-por-trafico-que-recibio-rebaja-de-condena-de-rabat-fue-detenido-otra"]]}
 ];
 
@@ -554,6 +556,27 @@ const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const maxM = 36;
 
+// Decretos publicados por Interferencia. Nunca enlazar decretos de delitos sexuales contra menores: identifican a condenados y lugares.
+const DECRETOS_BASE = "https://interferencia.cl/sites/default/files/";
+const DECRETOS = {
+  "Vladimir Medina Mamani":"decreto1.pdf.pdf",
+  "José Luis Liscano Bermúdez":"decreto2_1.pdf",
+  "Edixon Escobar García":"decreto3_1.pdf",
+  "Fredy Orlas Heredia":"decreto4_0.pdf",
+  "Cristhian Oblitas Uscamayta":"decreto5_0.pdf",
+  "Estefanía Cante Gonzales":"decreto6_0.pdf",
+  "Estela Cocha Tito":"decreto7_0.pdf",
+  "Soledad Chura Céspedes":"decreto8_0.pdf",
+  "Daniela Velásquez Jiménez":"decreto9.pdf",
+  "Javier Pérez Mamani":"decreto10.pdf",
+  "David Cano Arias":"decreto11.pdf",
+  "Sergio Saire Pozo":"decreto12.pdf",
+  "Wilber Tenajas Orellana":"decreto13.pdf",
+  "Jhonder Ollarves Berbesi":"decreto1.pdf",
+  "Winder Marott Morán":"decreto2.pdf",
+  "Franyorkin Aramburu Hernández":"decreto3.pdf"
+};
+const ICONO_DOC = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>';
 function card(d,i){
   const src = F[d.f];
   const mtxt = d.mt || (d.m!=null ? `${d.m} ${d.m===1?"mes":"meses"}` : null);
@@ -567,7 +590,7 @@ function card(d,i){
     ${d.m!=null?`<div class="bar" aria-hidden="true"><i style="width:${Math.min(100,d.m/maxM*100).toFixed(1)}%"></i></div>`:""}
     ${d.g?`<div class="gnote">${esc(d.g)}</div>`:""}
     ${d.ori?`<div class="ori ori-${d.ori}">${ORI[d.ori]}</div>`:""}
-    <div class="foot"><span>${meta}</span><a href="${src.u}" target="_blank" rel="noopener">${esc(src.m)}</a></div>
+    <div class="foot"><span>${meta}</span><span class="links">${d.tipo!=="sexual"&&DECRETOS[d.q]?`<a class="dec" href="${DECRETOS_BASE+DECRETOS[d.q]}" target="_blank" rel="noopener" aria-label="Ver decreto de ${esc(d.q)} (PDF en Interferencia)" title="PDF publicado por Interferencia">${ICONO_DOC}Decreto</a>`:""}<a href="${src.u}" target="_blank" rel="noopener">${esc(src.m)}</a></span></div>
   </article>`;
 }
 function ghost(){
