@@ -388,6 +388,7 @@ const F = {
   iReinc:{m:"Interferencia", u:"https://interferencia.cl/articulos/condenado-expulsion-por-trafico-que-recibio-rebaja-de-condena-de-rabat-fue-detenido-otra"},
   uchDrogas:{m:"Interferencia", u:"https://interferencia.cl/articulos/hasta-con-una-tonelada-de-droga-los-decretos-de-rabat-que-rebajaron-condenas-narcos"},
   bbRojas:{m:"BioBioChile", u:"https://www.biobiochile.cl/especial/bbcl-investiga/noticias/articulos/2026/11/08/los-decretos-no-se-detuvieron-rabat-y-nueva-subsecretaria-bajan-pena-a-condenado-por-brutal-homicidio.shtml"},
+  bb29:{m:"BioBioChile (29 oct)", u:"https://www.biobiochile.cl/noticias/nacional/chile/2026/10/29/fernando-rabat-y-oficialismo-informacion-erronea-boric.shtml"},
   rep5:{m:"Reportea", u:"https://reportea.cl/2026/11/05/rebajas-de-condenas-ministro-rabat-oculto-ante-el-congreso-las-sentencias-de-la-suprema-que-rechazaron-el-beneficio-para-pederastas/"},
   rep6:{m:"Reportea", u:"https://reportea.cl/2026/11/06/ministerio-de-justicia-y-jueces-rebajaron-en-30-meses-la-condena-de-un-pederasta-sin-considerar-informes-que-alertaban-riesgo-de-reincidencia/"},
   repRolex:{m:"Reportea", u:"https://reportea.cl/2026/10/29/doctrina-rabat-decreto-del-ministerio-de-justicia-dejo-libre-a-condenado-por-robos-de-relojes-rolex-en-las-condes/"}
@@ -398,7 +399,7 @@ const F = {
 // q: iniciales (sexual) o nombre publicado por la prensa (otros)
 // m: meses de rebaja (número, para totales; null si no se informó) · mt: texto si no es un número exacto
 // firma: "Rabat" | "Silva" | "Mira" | "" (no informado)
-// f: fuente principal · f2: segunda fuente (Reportea aporta fecha, firma o rebaja desde los decretos que publicó)
+// f: fuente principal · f2, f3: otras fuentes (Reportea aporta fecha, firma o rebaja desde los decretos que publicó)
 // est: "libre" (confirmado por la fuente) | "prision" | "sinconf"
 // g: nota de Gendarmería u otro antecedente (sin datos que identifiquen a la víctima)
 const S = (q,delito,m,firma,f,extra={}) => Object.assign({tipo:"sexual",q,delito,m,firma,est:"libre",f},extra);
@@ -436,7 +437,7 @@ const D = [
   S("J.A.V.","Abuso sexual (dos condenas)",27,"Silva","bb33",{sub:true,fd:"20 ago",f2:"rep5"}),
   S("F.Q.V.","Abuso sexual de menor de 14 años",9,"Rabat","bb33"),
   S("G.G.J.","Abuso sexual de menor de 14 años",6,"Rabat","bb33"),
-  S("G.R.R.","Violación y abuso sexual de menor de 14 años",30,"Mira","bb33",{sub:true,fd:"13 ago",f2:"rep6",g:"Gendarmería evaluó alto su riesgo de reincidencia. La Comisión de Libertad Condicional lo rechazó cinco veces entre 2024 y 2026; la comisión de rebaja no tuvo a la vista esos informes.",ori:"apelaciones"}),
+  S("G.R.R.","Violación y abuso sexual de menor de 14 años",30,"Mira","bb33",{sub:true,fd:"13 ago",f2:"rep6",f3:"bb29",g:"Gendarmería evaluó alto su riesgo de reincidencia. La Comisión de Libertad Condicional lo rechazó cinco veces entre 2024 y 2026; la comisión de rebaja no tuvo a la vista esos informes. BioBío informa una orden expresa de conceder la rebaja, pero el decreto no la invoca. Según Reportea, el fallo anuló su exclusión del beneficio por la comisión.",ori:"apelaciones"}),
   // BioBioChile, 3 nov 2026 (10 casos más; según el medio, por orden de la Corte Suprema)
   S("E.G.A.","Abuso sexual reiterado de menor de 14 años",null,"Rabat","bb43",{fd:"13 mar"}),
   S("J.L.M.","Abuso sexual de menores de 14 años",3,"Rabat","bb43",{fd:"13 mar"}),
@@ -611,7 +612,7 @@ function card(d,i){
     ${d.m!=null?`<div class="bar" aria-hidden="true"><i style="width:${Math.min(100,d.m/maxM*100).toFixed(1)}%"></i></div>`:""}
     ${d.g?`<div class="gnote">${esc(d.g)}</div>`:""}
     ${d.ori?`<div class="ori ori-${d.ori}">${ORI[d.ori]}</div>`:""}
-    <div class="foot"><span>${meta}</span><span class="links">${d.tipo!=="sexual"&&DECRETOS[d.q]?`<a class="dec" href="${decretoUrl(d.q)}" target="_blank" rel="noopener" aria-label="Ver decreto de ${esc(d.q)} (PDF en ${decretoMedio(d.q)})" title="PDF publicado por ${decretoMedio(d.q)}">${ICONO_DOC}Decreto</a>`:""}<a href="${src.u}" target="_blank" rel="noopener">${esc(src.m)}</a>${d.f2?`<a href="${F[d.f2].u}" target="_blank" rel="noopener">${esc(F[d.f2].m)}</a>`:""}</span></div>
+    <div class="foot"><span>${meta}</span><span class="links">${d.tipo!=="sexual"&&DECRETOS[d.q]?`<a class="dec" href="${decretoUrl(d.q)}" target="_blank" rel="noopener" aria-label="Ver decreto de ${esc(d.q)} (PDF en ${decretoMedio(d.q)})" title="PDF publicado por ${decretoMedio(d.q)}">${ICONO_DOC}Decreto</a>`:""}<a href="${src.u}" target="_blank" rel="noopener">${esc(src.m)}</a>${[d.f2,d.f3].filter(Boolean).map(k=>`<a href="${F[k].u}" target="_blank" rel="noopener">${esc(F[k].m)}</a>`).join("")}</span></div>
   </article>`;
 }
 function ghost(){
