@@ -338,12 +338,12 @@
       <h2>Cómo se arma este registro</h2>
     </div>
     <div class="methodbox">
-      <div><h4>Fuentes</h4><p>Cada caso, hecho y cifra enlaza a la nota de prensa de la que sale. Citamos a BioBioChile, CIPER, CNN Chile, Ex-Ante, Interferencia, La Tercera, Reportajes T13 y The Clinic. Las fotos son del Gobierno de Chile (Wikimedia Commons y Ministerio de Justicia). El Gobierno no ha publicado los decretos completos.</p></div>
+      <div><h4>Fuentes</h4><p>Cada caso, hecho y cifra enlaza a la nota de prensa de la que sale. Citamos a BioBioChile, CIPER, CNN Chile, Ex-Ante, Interferencia, La Tercera, Reportajes T13, Reportea y The Clinic. Las fotos son del Gobierno de Chile (Wikimedia Commons y Ministerio de Justicia). El Gobierno no ha publicado los decretos completos. Parte de las fechas y firmas viene de los decretos que publicó Reportea.</p></div>
       <div><h4>Víctimas primero</h4><p>En delitos sexuales contra menores no publicamos nombres de condenados, comunas ni parentesco con la víctima. Las iniciales se toman de la prensa que identificó cada caso. No enlazamos decretos de estos casos para proteger a las víctimas; en otros delitos, el ícono «Decreto» lleva al PDF publicado por Interferencia.</p></div>
       <div><h4>Orden judicial o decisión propia</h4><p>Marcamos «por orden» de la Corte Suprema o de una Corte de Apelaciones solo cuando la prensa informa un fallo que obligó a conceder la rebaja. Que un caso haya pasado por tribunales no basta: muchos fallos solo ordenaban revisar la solicitud. En los otros delitos marcamos el origen cuando la prensa informa cómo se concedió la rebaja; si no, la ficha dice «Origen no informado».</p></div>
       <div><h4>Extranjeros condenados por drogas</h4><p>El «115 de 150» viene de los decretos a los que accedió Interferencia; no es una cifra oficial y el universo es mayor. Esos 115 no entran en el contador ni en las firmas: solo sumamos casos con nombre publicado y firma confirmada por la prensa o el decreto. Las fuentes hablan de decretos de «este año», sin la fecha de cada uno, así que no afirmamos que todos sean de este gobierno.</p></div>
       <div><h4>Liberado no es lo mismo que rebajado</h4><p>Cada ficha marca «En libertad» solo si una fuente lo confirma. «Sigue preso», «Volvió a prisión» y «Sin confirmar» quedan fuera del contador principal.</p></div>
-      <div><h4>Lo que falta</h4><p>De las 56 rebajas por delitos sexuales contra menores, la prensa ha identificado <span id="nIdent">44</span>. Las <span id="nFalta">12</span> restantes aparecerán a medida que se conozcan.</p></div>
+      <div><h4>Lo que falta</h4><p>De las 56 rebajas por delitos sexuales contra menores, la prensa ha identificado <span id="nIdent">44</span>. Las <span id="nFalta">12</span> restantes aparecerán a medida que se conozcan. Tres de los identificados tienen decretos de octubre, después del período que cubre la cifra de 56 (11 de marzo al 13 de septiembre), así que las que faltan pueden ser más (<a href="https://reportea.cl/2026/11/05/rebajas-de-condenas-ministro-rabat-oculto-ante-el-congreso-las-sentencias-de-la-suprema-que-rechazaron-el-beneficio-para-pederastas/" target="_blank" rel="noopener">Reportea</a>).</p></div>
     </div>
   </div>
 </section>
@@ -374,7 +374,7 @@
 
 <script>
 // ===== FECHA DE ACTUALIZACIÓN =====
-const ACTUALIZADO = {corto:"8 nov 2026", largo:"8 de noviembre de 2026"};
+const ACTUALIZADO = {corto:"9 nov 2026", largo:"9 de noviembre de 2026"};
 
 // ===== FUENTES =====
 const F = {
@@ -387,7 +387,10 @@ const F = {
   bbCNI:{m:"BioBioChile", u:"https://www.biobiochile.cl/noticias/nacional/chile/2026/10/22/cesar-acuna-luengo-el-decreto-de-justicia-que-rebajo-pena-a-exagente-cni-condenado-por-ultimos-secuestros-de-la-dictadura.shtml"},
   iReinc:{m:"Interferencia", u:"https://interferencia.cl/articulos/condenado-expulsion-por-trafico-que-recibio-rebaja-de-condena-de-rabat-fue-detenido-otra"},
   uchDrogas:{m:"Interferencia", u:"https://interferencia.cl/articulos/hasta-con-una-tonelada-de-droga-los-decretos-de-rabat-que-rebajaron-condenas-narcos"},
-  bbRojas:{m:"BioBioChile", u:"https://www.biobiochile.cl/especial/bbcl-investiga/noticias/articulos/2026/11/08/los-decretos-no-se-detuvieron-rabat-y-nueva-subsecretaria-bajan-pena-a-condenado-por-brutal-homicidio.shtml"}
+  bbRojas:{m:"BioBioChile", u:"https://www.biobiochile.cl/especial/bbcl-investiga/noticias/articulos/2026/11/08/los-decretos-no-se-detuvieron-rabat-y-nueva-subsecretaria-bajan-pena-a-condenado-por-brutal-homicidio.shtml"},
+  rep5:{m:"Reportea", u:"https://reportea.cl/2026/11/05/rebajas-de-condenas-ministro-rabat-oculto-ante-el-congreso-las-sentencias-de-la-suprema-que-rechazaron-el-beneficio-para-pederastas/"},
+  rep6:{m:"Reportea", u:"https://reportea.cl/2026/11/06/ministerio-de-justicia-y-jueces-rebajaron-en-30-meses-la-condena-de-un-pederasta-sin-considerar-informes-que-alertaban-riesgo-de-reincidencia/"},
+  repRolex:{m:"Reportea", u:"https://reportea.cl/2026/10/29/doctrina-rabat-decreto-del-ministerio-de-justicia-dejo-libre-a-condenado-por-robos-de-relojes-rolex-en-las-condes/"}
 };
 
 // ===== CASOS =====
@@ -395,44 +398,45 @@ const F = {
 // q: iniciales (sexual) o nombre publicado por la prensa (otros)
 // m: meses de rebaja (número, para totales; null si no se informó) · mt: texto si no es un número exacto
 // firma: "Rabat" | "Silva" | "Mira" | "" (no informado)
+// f: fuente principal · f2: segunda fuente (Reportea aporta fecha, firma o rebaja desde los decretos que publicó)
 // est: "libre" (confirmado por la fuente) | "prision" | "sinconf"
 // g: nota de Gendarmería u otro antecedente (sin datos que identifiquen a la víctima)
 const S = (q,delito,m,firma,f,extra={}) => Object.assign({tipo:"sexual",q,delito,m,firma,est:"libre",f},extra);
 const D = [
   // BioBioChile, 26 oct 2026 (33 casos)
   S("P.G.H.","Abuso sexual de menor de 14 años",11,"Silva","bb33"),
-  S("J.S.O.","Abuso sexual impropio reiterado",9,"Silva","bb33"),
+  S("J.S.O.","Abuso sexual impropio reiterado",9,"Silva","bb33",{sub:true,fd:"24 jun",f2:"rep5"}),
   S("H.O.A.","Violación de menor de 14 años",18,"Silva","bb33",{sub:true,fd:"24 jun"}),
   S("P.A.V.","Abuso sexual de menor de 14 años",15,"Rabat","bb33"),
-  S("P.R.O.","Abuso sexual de menor de 14 años",10,"Rabat","bb33"),
+  S("P.R.O.","Abuso sexual de menor de 14 años",10,"Rabat","bb33",{fd:"13 oct",f2:"rep5"}),
   S("E.N.N.","Abuso sexual reiterado de menor de 14 años",17,"Rabat","bb33"),
-  S("P.P.S.","Abuso sexual",11,"Silva","bb33",{g:"Gendarmería subió su riesgo de reincidencia de medio a alto en 2025."}),
+  S("P.P.S.","Abuso sexual",11,"Silva","bb33",{sub:true,fd:"24 jun",f2:"rep5",g:"Gendarmería subió su riesgo de reincidencia de medio a alto en 2025."}),
   S("H.A.S.","Abuso sexual impropio de menor de 14 años",6,"Rabat","bb33",{g:"Niega el delito. Gendarmería evaluó alto su patrón antisocial."}),
-  S("P.A.F.","Violación reiterada de menor de 14 años",9,"Rabat","bb33"),
-  S("J.C.V.","Violación reiterada de menor de 14 años",9,"Rabat","bb33"),
-  S("E.E.H.","Abuso sexual de menor de 14 años",12.6,"Rabat","bb33",{mt:"12 meses y 18 días"}),
-  S("R.C.C.","Abuso sexual y violación",16,"Rabat","bb33"),
-  S("L.C.M.","Estupro, abuso sexual y violación reiterada",30,"Rabat","bb33"),
+  S("P.A.F.","Violación reiterada de menor de 14 años",9,"Rabat","bb33",{fd:"28 jul",f2:"rep5"}),
+  S("J.C.V.","Violación reiterada de menor de 14 años",9,"Rabat","bb33",{fd:"28 jul",f2:"rep5"}),
+  S("E.E.H.","Abuso sexual de menor de 14 años",12.6,"Rabat","bb33",{fd:"8 oct",f2:"rep5",mt:"12 meses y 18 días"}),
+  S("R.C.C.","Abuso sexual y violación",16,"Rabat","bb33",{fd:"28 jul",f2:"rep5"}),
+  S("L.C.M.","Estupro, abuso sexual y violación reiterada",30,"Rabat","bb33",{fd:"8 jul",f2:"rep5"}),
   S("J.V.G.","Abuso sexual y violación",13,"Rabat","bb33"),
-  S("P.E.R.","Violación reiterada y abuso sexual",30,"Rabat","bb33"),
-  S("J.P.C.","Abusos sexuales contra menores",9,"Rabat","bb33",{g:"Gendarmería evaluó alto su riesgo de reincidencia."}),
+  S("P.E.R.","Violación reiterada y abuso sexual",30,"Rabat","bb33",{fd:"2 oct",f2:"rep5"}),
+  S("J.P.C.","Abusos sexuales contra menores",9,"Rabat","bb33",{fd:"28 jul",f2:"rep5",g:"Gendarmería evaluó alto su riesgo de reincidencia."}),
   S("J.F.P.","Abuso sexual de menor de 14 años",10,"Rabat","bb33"),
-  S("M.V.L.","Violación de menor de 14 años",5,"Silva","bb33"),
-  S("D.J.G.","Abuso sexual impropio",18,"Rabat","bb33"),
+  S("M.V.L.","Violación de menor de 14 años",5,"Silva","bb33",{sub:true,fd:"14 jul",f2:"rep5"}),
+  S("D.J.G.","Abuso sexual impropio",18,"Rabat","bb33",{fd:"31 jul",f2:"rep5"}),
   S("J.S.A.","Abuso sexual de menor de 14 años",3,"Silva","bb33"),
-  S("J.C.P.","Abuso sexual reiterado de menor de 15 años",10,"Silva","bb33"),
+  S("J.C.P.","Abuso sexual reiterado de menor de 15 años",10,"Silva","bb33",{sub:true,fd:"17 ago",f2:"rep5"}),
   S("L.V.J.","Violación reiterada",6,"Silva","bb33"),
   S("W.G.M.","Abuso sexual",21,"Rabat","bb33",{fd:"31 jul",g:"Riesgo de reincidencia medio en delitos sexuales y alto en delitos comunes."}),
-  S("D.A.C.","Abuso sexual impropio y violación de menor de 14 años",31,"Rabat","bb33",{g:"Ya había recibido una rebaja anterior de 25 meses."}),
-  S("B.C.S.","Abuso sexual de menor de 14 años",10,"Rabat","bb33"),
+  S("D.A.C.","Abuso sexual impropio y violación de menor de 14 años",31,"Rabat","bb33",{fd:"24 ago",f2:"rep5",g:"Ya había recibido una rebaja anterior de 25 meses."}),
+  S("B.C.S.","Abuso sexual de menor de 14 años",10,"Rabat","bb33",{fd:"11 sep",f2:"rep5"}),
   S("G.L.S.","Violación y abuso sexual de menor",36,"Rabat","bb33",{g:"La mayor rebaja identificada."}),
-  S("R.L.B.","Violación",8,"Silva","bb33"),
-  S("J.H.P.","Violación, abuso sexual y exhibición de material pornográfico",24,"Rabat","bb33"),
+  S("R.L.B.","Violación de menor de 14 años",8,"Silva","bb33",{sub:true,fd:"11 ago",f2:"rep5"}),
+  S("J.H.P.","Violación, abuso sexual y exhibición de material pornográfico",24,"Rabat","bb33",{fd:"26 ago",f2:"rep5"}),
   S("M.A.V.","Violación de menor de 14 años",8,"Rabat","bb33"),
-  S("J.A.V.","Abuso sexual (dos condenas)",27,"Silva","bb33"),
+  S("J.A.V.","Abuso sexual (dos condenas)",27,"Silva","bb33",{sub:true,fd:"20 ago",f2:"rep5"}),
   S("F.Q.V.","Abuso sexual de menor de 14 años",9,"Rabat","bb33"),
   S("G.G.J.","Abuso sexual de menor de 14 años",6,"Rabat","bb33"),
-  S("G.R.R.","Violación y abuso sexual de menor de 14 años",30,"Mira","bb33",{g:"Gendarmería evaluó alto su riesgo de reincidencia.",ori:"apelaciones"}),
+  S("G.R.R.","Violación y abuso sexual de menor de 14 años",30,"Mira","bb33",{sub:true,fd:"13 ago",f2:"rep6",g:"Gendarmería evaluó alto su riesgo de reincidencia. La Comisión de Libertad Condicional lo rechazó cinco veces entre 2024 y 2026; la comisión de rebaja no tuvo a la vista esos informes.",ori:"apelaciones"}),
   // BioBioChile, 3 nov 2026 (10 casos más; según el medio, por orden de la Corte Suprema)
   S("E.G.A.","Abuso sexual reiterado de menor de 14 años",null,"Rabat","bb43",{fd:"13 mar"}),
   S("J.L.M.","Abuso sexual de menores de 14 años",3,"Rabat","bb43",{fd:"13 mar"}),
@@ -441,11 +445,17 @@ const D = [
   S("E.B.G.","Violación reiterada de menor de 14 años",15,"Silva","bb43",{fd:"17 mar"}),
   S("R.C.C.","Violación de menor de 14 años",24,"Rabat","bb43",{fd:"10 abr",g:"La Comisión de Libertad Condicional lo rechazó en 2024 por riesgo medio."}),
   S("M.B.","Violación y abuso sexual continuados de menor de 14 años",27,"Rabat","bb43",{g:"Niega la violación. Gendarmería recomendó seguimiento."}),
-  S("S.B.R.","Violación de menor de 14 años",11,"Rabat","bb43"),
-  S("M.M.M.","Violación y producción de pornografía infantil",23,"Rabat","bb43"),
-  S("J.M.L.","Violación de menor de 14 años",null,"","bb43"),
+  S("S.B.R.","Violación de menor de 14 años",11,"Rabat","bb43",{fd:"17 abr",f2:"rep5"}),
+  S("M.M.M.","Violación y producción de pornografía infantil",23,"Rabat","bb43",{fd:"10 abr",f2:"rep5"}),
+  S("J.M.L.","Violación de menor de 14 años",6,"Rabat","bb43",{fd:"17 abr",f2:"rep5"}),
   // Interferencia, 4 nov 2026 (identificado por La Prensa Austral)
   S("J.S.O.","Violación y abuso sexual reiterado de una niña",18,"Silva","iPA",{sub:true,fd:"8 sep",g:"Salió al día siguiente. Gendarmería lo había evaluado con riesgo alto de reincidencia y le negaron la libertad condicional cuatro años seguidos."}),
+  // Reportea, 5 nov 2026 (decretos publicados por el medio; no se enlazan). Estado: la nota no confirma la salida.
+  S("N.P.O.","Violación reiterada",27,"Rabat","rep5",{fd:"17 abr",ori:"suprema",est:"sinconf",g:"Su nueva fecha de término ya había pasado cuando se firmó el decreto. Ninguna fuente confirma aún su salida."}),
+  S("M.M.A.","Violación de menor",13,"Silva","rep5",{sub:true,fd:"11 ago",est:"sinconf",g:"Su nueva fecha de término ya había pasado cuando se firmó el decreto. Ninguna fuente confirma aún su salida."}),
+  S("S.B.A.","Abuso sexual de menor de 14 años",11,"Mira","rep5",{sub:true,fd:"13 ago",est:"sinconf",g:"La Seremi Metropolitana había advertido que no cumplía los requisitos. Su nueva fecha de término ya había pasado cuando se firmó el decreto. Ninguna fuente confirma aún su salida."}),
+  S("E.A.V.","Abuso sexual reiterado de menor de 14 años",8,"Rabat","rep5",{fd:"17 abr",ori:"suprema",est:"sinconf",g:"Su nueva fecha de término ya había pasado cuando se firmó el decreto. Ninguna fuente confirma aún su salida."}),
+  S("J.C.O.","Abuso sexual reiterado de menor",3,"Rabat","rep5",{fd:"17 abr",ori:"suprema",est:"sinconf",g:"Su nueva fecha de término ya había pasado cuando se firmó el decreto. Ninguna fuente confirma aún su salida."}),
 
   // Otros delitos (nombres ya publicados por la prensa)
   {tipo:"drogas",q:"Massimiliano Beltrami",delito:"Narcotráfico: más de 100 kilos de cocaína ocultos en motos de agua (Operación Tirreno, 2018)",m:9.5,mt:"9 meses y 16 días",firma:"Rabat",fd:"15 may",est:"sinconf",g:"Vinculado a la mafia italiana. Debía ser extraditado a Italia.",f:"bbOtros"},
@@ -458,6 +468,7 @@ const D = [
   {tipo:"robo",q:"Franyorkin Aramburu Hernández",delito:"Robo con intimidación y porte de armas; extorsionaba a migrantes diciendo ser del Tren de Aragua",m:9,firma:"Rabat",fd:"6 jul",est:"prision",g:"La Comisión de Libertad Condicional le había negado la salida en 2025. Su salida quedó para el 8 de marzo de 2027.",f:"bbTDA"},
   {tipo:"robo",q:"Winder Marott Morán",delito:"Robo con intimidación y porte de armas; extorsionaba a migrantes diciendo ser del Tren de Aragua",m:3,firma:"Rabat",fd:"4 sep",est:"libre",g:"Salió el 9 de septiembre. No fue expulsado.",f:"bbTDA"},
   {tipo:"robo",q:"Jhonder Ollarves Berbesi",sub:true,delito:"Robo con intimidación y porte de armas; extorsionaba a migrantes diciendo ser del Tren de Aragua",m:3,firma:"Silva",fd:"7 sep",est:"libre",g:"Salió el 10 de septiembre. No fue expulsado.",f:"bbTDA"},
+  {tipo:"robo",q:"Gabriel Blanco Martínez",sub:true,delito:"Robo con violencia: asaltos armados a portadores de relojes Rolex en el sector oriente de Santiago (2022); condenado a 5 años y un día",m:10,firma:"Mira",fd:"19 oct",est:"libre",g:"Salió el 20 de octubre. La Comisión de Libertad Condicional lo había rechazado por elevado riesgo de reincidencia.",f:"repRolex"},
   {tipo:"ddhh",q:"Miguel Arias Navarrete",delito:"Excarabinero, secuestro calificado de Justo Flores Martínez (1973)",m:9,firma:"Rabat",est:"libre",g:"Cumplía en Punta Peuco. Su salida se adelantó del 14 de diciembre al 14 de marzo.",f:"bbPP"},
   {tipo:"ddhh",q:"Manuel Cabezas Pérez",delito:"Exintegrante de la FACh, torturas reiteradas a dos detenidos en la Base Aérea El Bosque",m:8,firma:"Rabat",est:"libre",g:"Cumplía en Punta Peuco. Su salida se adelantó del 28 de noviembre al 28 de marzo.",f:"bbPP"},
   {tipo:"drogas",q:"Jhoel Ramos Antesana",delito:"Narcotráfico: transporte de 867 kilos de marihuana, entre otras drogas (2021)",m:3,firma:"",fd:"12 may",est:"sinconf",g:"El decreto fijó su salida para dos días después.",f:"uchDrogas"},
@@ -489,9 +500,10 @@ D.forEach(d=>{ if(d.tipo==="sexual" && !d.ori) d.ori = d.f==="bb43" ? "suprema" 
 //  · Tren de Aragua (Interferencia, 27 oct): «sin un rechazo inicial por parte del ministro».
 //  · Beltrami, Salas Villar, Zúñiga (BioBío, 28 oct): los decretos dicen que el ministerio no podía denegarlo.
 //  · Acuña Luengo (BioBío, 22 oct): la Corte solo ordenó pronunciarse, «no ordenó expresamente conceder la rebaja».
+//  · Blanco Martínez (Reportea, 29 oct): el decreto dice que el ministerio no podía denegarlo.
 //  · Rojas Gallardo (BioBío, 8 nov): Justicia informó la rebaja antes de que la corte fallara el amparo.
 // El resto: «Origen no informado».
-const ORI_MIN = ["Massimiliano Beltrami","Patricio Salas Villar","José Zúñiga Argel","Franyorkin Aramburu Hernández","Winder Marott Morán","Jhonder Ollarves Berbesi","César Acuña Luengo","Peter Rojas Gallardo"];
+const ORI_MIN = ["Massimiliano Beltrami","Patricio Salas Villar","José Zúñiga Argel","Franyorkin Aramburu Hernández","Winder Marott Morán","Jhonder Ollarves Berbesi","César Acuña Luengo","Peter Rojas Gallardo","Gabriel Blanco Martínez"];
 D.forEach(d=>{ if(d.tipo!=="sexual") d.ori = (d.tipo==="drogas" || ORI_MIN.includes(d.q)) ? "ministerio" : "nd"; });
 const ORI = {ministerio:"Decisión del Ministerio, sin orden de conceder", suprema:"Por orden de la Corte Suprema", apelaciones:"Por orden de la Corte de Apelaciones", nd:"Origen no informado"};
 
@@ -595,7 +607,7 @@ function card(d,i){
     ${d.m!=null?`<div class="bar" aria-hidden="true"><i style="width:${Math.min(100,d.m/maxM*100).toFixed(1)}%"></i></div>`:""}
     ${d.g?`<div class="gnote">${esc(d.g)}</div>`:""}
     ${d.ori?`<div class="ori ori-${d.ori}">${ORI[d.ori]}</div>`:""}
-    <div class="foot"><span>${meta}</span><span class="links">${d.tipo!=="sexual"&&DECRETOS[d.q]?`<a class="dec" href="${DECRETOS_BASE+DECRETOS[d.q]}" target="_blank" rel="noopener" aria-label="Ver decreto de ${esc(d.q)} (PDF en Interferencia)" title="PDF publicado por Interferencia">${ICONO_DOC}Decreto</a>`:""}<a href="${src.u}" target="_blank" rel="noopener">${esc(src.m)}</a></span></div>
+    <div class="foot"><span>${meta}</span><span class="links">${d.tipo!=="sexual"&&DECRETOS[d.q]?`<a class="dec" href="${DECRETOS_BASE+DECRETOS[d.q]}" target="_blank" rel="noopener" aria-label="Ver decreto de ${esc(d.q)} (PDF en Interferencia)" title="PDF publicado por Interferencia">${ICONO_DOC}Decreto</a>`:""}<a href="${src.u}" target="_blank" rel="noopener">${esc(src.m)}</a>${d.f2?`<a href="${F[d.f2].u}" target="_blank" rel="noopener">${esc(F[d.f2].m)}</a>`:""}</span></div>
   </article>`;
 }
 function ghost(){
@@ -635,8 +647,9 @@ function porque(){
       <div><b>${ns}</b><span>se dieron por orden de un tribunal, después de que el beneficio se negara</span></div>
       <div><b>${SIN_IDENTIFICAR}</b><span>sin información: la prensa aún no los identifica</span></div>
     </div>
-    <p>El ministro Rabat sostiene que 36 de los 56 casos «pasaron por tribunales». Pero esos fallos ordenaban revisar las solicitudes o pronunciarse en un plazo, no conceder la rebaja.</p>
-    <div class="s"><a href="${F.bb43.u}" target="_blank" rel="noopener">BioBioChile</a> · <a href="https://www.biobiochile.cl/noticias/nacional/chile/2026/10/29/fernando-rabat-y-oficialismo-informacion-erronea-boric.shtml" target="_blank" rel="noopener">BioBioChile (29 oct)</a> · <a href="https://www.t13.cl/noticia/ex-ante/politica/la-nueva-defensa-rabat-ministro-justicia-sostiene-36-56-rebajas-condenas-pasaro-27-10-2026" target="_blank" rel="noopener">Ex-Ante</a> · <a href="https://www.ciperchile.cl/2026/11/04/fallos-de-cortes-de-apelaciones-establecen-que-rabat-si-podia-rechazar-las-rebajas-de-condenas/" target="_blank" rel="noopener">CIPER</a> · <a href="${F.iPA.u}" target="_blank" rel="noopener">Interferencia</a></div>
+    <p>El ministro Rabat sostiene que 36 de los 56 casos «pasaron por tribunales». Pero esos fallos ordenaban revisar las solicitudes o pronunciarse en un plazo, no conceder la rebaja. Entre marzo y junio, además, la Corte Suprema respaldó seis rechazos del ministerio y anuló nueve.</p>
+    <p>Rabat también dice que no puede oponerse a lo que aprueban las comisiones. Reportea halló más de 20 decretos en que rechazó rebajas por otros delitos, ya visadas por las comisiones y las Seremis. El ministerio responde que rechaza cuando hay una causal legal de exclusión.</p>
+    <div class="s"><a href="${F.bb43.u}" target="_blank" rel="noopener">BioBioChile</a> · <a href="https://www.biobiochile.cl/noticias/nacional/chile/2026/10/29/fernando-rabat-y-oficialismo-informacion-erronea-boric.shtml" target="_blank" rel="noopener">BioBioChile (29 oct)</a> · <a href="https://www.t13.cl/noticia/ex-ante/politica/la-nueva-defensa-rabat-ministro-justicia-sostiene-36-56-rebajas-condenas-pasaro-27-10-2026" target="_blank" rel="noopener">Ex-Ante</a> · <a href="https://www.ciperchile.cl/2026/11/04/fallos-de-cortes-de-apelaciones-establecen-que-rabat-si-podia-rechazar-las-rebajas-de-condenas/" target="_blank" rel="noopener">CIPER</a> · <a href="${F.iPA.u}" target="_blank" rel="noopener">Interferencia</a> · <a href="${F.rep5.u}" target="_blank" rel="noopener">Reportea</a></div>
   </div>`;
 }
 function render(){
