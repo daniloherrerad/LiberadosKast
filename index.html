@@ -339,7 +339,7 @@
     </div>
     <div class="methodbox">
       <div><h4>Fuentes</h4><p>Cada caso, hecho y cifra enlaza a la nota de prensa de la que sale. Citamos a BioBioChile, CIPER, CNN Chile, Ex-Ante, Interferencia, La Tercera, Reportajes T13, Reportea y The Clinic. Las fotos son del Gobierno de Chile (Wikimedia Commons y Ministerio de Justicia). El Gobierno no ha publicado los decretos completos. Parte de las fechas y firmas viene de los decretos que publicó Reportea.</p></div>
-      <div><h4>Víctimas primero</h4><p>En delitos sexuales contra menores no publicamos nombres de condenados, comunas ni parentesco con la víctima. Las iniciales se toman de la prensa que identificó cada caso. No enlazamos decretos de estos casos para proteger a las víctimas; en otros delitos, el ícono «Decreto» lleva al PDF publicado por Interferencia.</p></div>
+      <div><h4>Víctimas primero</h4><p>En delitos sexuales contra menores no publicamos nombres de condenados, comunas ni parentesco con la víctima. Las iniciales se toman de la prensa que identificó cada caso. No enlazamos decretos de estos casos para proteger a las víctimas; en otros delitos, el ícono «Decreto» lleva al PDF publicado por la prensa, cuando está disponible.</p></div>
       <div><h4>Orden judicial o decisión propia</h4><p>Marcamos «por orden» de la Corte Suprema o de una Corte de Apelaciones solo cuando la prensa informa un fallo que obligó a conceder la rebaja. Que un caso haya pasado por tribunales no basta: muchos fallos solo ordenaban revisar la solicitud. En los otros delitos marcamos el origen cuando la prensa informa cómo se concedió la rebaja; si no, la ficha dice «Origen no informado».</p></div>
       <div><h4>Extranjeros condenados por drogas</h4><p>El «115 de 150» viene de los decretos a los que accedió Interferencia; no es una cifra oficial y el universo es mayor. Esos 115 no entran en el contador ni en las firmas: solo sumamos casos con nombre publicado y firma confirmada por la prensa o el decreto. Las fuentes hablan de decretos de «este año», sin la fecha de cada uno, así que no afirmamos que todos sean de este gobierno.</p></div>
       <div><h4>Liberado no es lo mismo que rebajado</h4><p>Cada ficha marca «En libertad» solo si una fuente lo confirma. «Sigue preso», «Volvió a prisión» y «Sin confirmar» quedan fuera del contador principal.</p></div>
@@ -573,7 +573,8 @@ const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const maxM = 36;
 
-// Decretos publicados por Interferencia. Nunca enlazar decretos de delitos sexuales contra menores: identifican a condenados y lugares.
+// Decretos publicados por la prensa. Criterio: se enlazan todos los que no sean de delitos sexuales contra menores. Esos nunca: identifican a condenados y lugares.
+// Valor: archivo en Interferencia, o URL completa si lo publicó otro medio.
 const DECRETOS_BASE = "https://interferencia.cl/sites/default/files/";
 const DECRETOS = {
   "Vladimir Medina Mamani":"decreto1.pdf.pdf",
@@ -591,8 +592,11 @@ const DECRETOS = {
   "Wilber Tenajas Orellana":"decreto13.pdf",
   "Jhonder Ollarves Berbesi":"decreto1.pdf",
   "Winder Marott Morán":"decreto2.pdf",
-  "Franyorkin Aramburu Hernández":"decreto3.pdf"
+  "Franyorkin Aramburu Hernández":"decreto3.pdf",
+  "Gabriel Blanco Martínez":"https://reportea.cl/wp-content/uploads/2026/10/Decreto-rebaja-condena-Blanco.pdf"
 };
+const decretoUrl = q => DECRETOS[q].startsWith("http") ? DECRETOS[q] : DECRETOS_BASE + DECRETOS[q];
+const decretoMedio = q => DECRETOS[q].startsWith("http") ? "Reportea" : "Interferencia";
 const ICONO_DOC = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>';
 function card(d,i){
   const src = F[d.f];
@@ -607,7 +611,7 @@ function card(d,i){
     ${d.m!=null?`<div class="bar" aria-hidden="true"><i style="width:${Math.min(100,d.m/maxM*100).toFixed(1)}%"></i></div>`:""}
     ${d.g?`<div class="gnote">${esc(d.g)}</div>`:""}
     ${d.ori?`<div class="ori ori-${d.ori}">${ORI[d.ori]}</div>`:""}
-    <div class="foot"><span>${meta}</span><span class="links">${d.tipo!=="sexual"&&DECRETOS[d.q]?`<a class="dec" href="${DECRETOS_BASE+DECRETOS[d.q]}" target="_blank" rel="noopener" aria-label="Ver decreto de ${esc(d.q)} (PDF en Interferencia)" title="PDF publicado por Interferencia">${ICONO_DOC}Decreto</a>`:""}<a href="${src.u}" target="_blank" rel="noopener">${esc(src.m)}</a>${d.f2?`<a href="${F[d.f2].u}" target="_blank" rel="noopener">${esc(F[d.f2].m)}</a>`:""}</span></div>
+    <div class="foot"><span>${meta}</span><span class="links">${d.tipo!=="sexual"&&DECRETOS[d.q]?`<a class="dec" href="${decretoUrl(d.q)}" target="_blank" rel="noopener" aria-label="Ver decreto de ${esc(d.q)} (PDF en ${decretoMedio(d.q)})" title="PDF publicado por ${decretoMedio(d.q)}">${ICONO_DOC}Decreto</a>`:""}<a href="${src.u}" target="_blank" rel="noopener">${esc(src.m)}</a>${d.f2?`<a href="${F[d.f2].u}" target="_blank" rel="noopener">${esc(F[d.f2].m)}</a>`:""}</span></div>
   </article>`;
 }
 function ghost(){
