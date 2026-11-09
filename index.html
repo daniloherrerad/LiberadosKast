@@ -388,6 +388,9 @@ const F = {
   iReinc:{m:"Interferencia", u:"https://interferencia.cl/articulos/condenado-expulsion-por-trafico-que-recibio-rebaja-de-condena-de-rabat-fue-detenido-otra"},
   uchDrogas:{m:"Interferencia", u:"https://interferencia.cl/articulos/hasta-con-una-tonelada-de-droga-los-decretos-de-rabat-que-rebajaron-condenas-narcos"},
   bbRojas:{m:"BioBioChile", u:"https://www.biobiochile.cl/especial/bbcl-investiga/noticias/articulos/2026/11/08/los-decretos-no-se-detuvieron-rabat-y-nueva-subsecretaria-bajan-pena-a-condenado-por-brutal-homicidio.shtml"},
+  bbAmparo:{m:"BioBioChile (28 oct)", u:"https://www.biobiochile.cl/noticias/nacional/chile/2026/10/28/subsecretario-silva-firmo-rebaja-de-pena-a-abusador-sexual-en-plena-revision-de-recurso-de-amparo.shtml"},
+  clinicJAV:{m:"The Clinic", u:"https://www.theclinic.cl/2026/10/31/la-trama-del-hombre-condenado-por-abusar-sexualmente-de-su-hija-y-su-nieta-la-justicia-le-nego-cinco-veces-la-libertad-condicional-pero-termino-libre-por-decreto/"},
+  megaCNI:{m:"Meganoticias", u:"https://www.meganoticias.cl/nacional/535566-corte-suprema-confirma-libertad-exagente-cni-cesar-acuna-luengo-04-11-2026.html"},
   bb29:{m:"BioBioChile (29 oct)", u:"https://www.biobiochile.cl/noticias/nacional/chile/2026/10/29/fernando-rabat-y-oficialismo-informacion-erronea-boric.shtml"},
   rep5:{m:"Reportea", u:"https://reportea.cl/2026/11/05/rebajas-de-condenas-ministro-rabat-oculto-ante-el-congreso-las-sentencias-de-la-suprema-que-rechazaron-el-beneficio-para-pederastas/"},
   rep6:{m:"Reportea", u:"https://reportea.cl/2026/11/06/ministerio-de-justicia-y-jueces-rebajaron-en-30-meses-la-condena-de-un-pederasta-sin-considerar-informes-que-alertaban-riesgo-de-reincidencia/"},
@@ -406,7 +409,7 @@ const S = (q,delito,m,firma,f,extra={}) => Object.assign({tipo:"sexual",q,delito
 const D = [
   // BioBioChile, 26 oct 2026 (33 casos)
   S("P.G.H.","Abuso sexual de menor de 14 años",11,"Silva","bb33"),
-  S("J.S.O.","Abuso sexual impropio reiterado",9,"Silva","bb33",{sub:true,fd:"24 jun",f2:"rep5"}),
+  S("J.S.O.","Abuso sexual impropio reiterado",9,"Silva","bb33",{sub:true,fd:"24 jun",f2:"rep5",f3:"bbAmparo",g:"Silva firmó el decreto con un amparo pendiente en la Corte de Valparaíso, presentado nueve días antes. El abogado desistió del recurso tres días después."}),
   S("H.O.A.","Violación de menor de 14 años",18,"Silva","bb33",{sub:true,fd:"24 jun"}),
   S("P.A.V.","Abuso sexual de menor de 14 años",15,"Rabat","bb33"),
   S("P.R.O.","Abuso sexual de menor de 14 años",10,"Rabat","bb33",{fd:"13 oct",f2:"rep5"}),
@@ -434,7 +437,7 @@ const D = [
   S("R.L.B.","Violación de menor de 14 años",8,"Silva","bb33",{sub:true,fd:"11 ago",f2:"rep5"}),
   S("J.H.P.","Violación, abuso sexual y exhibición de material pornográfico",24,"Rabat","bb33",{fd:"26 ago",f2:"rep5"}),
   S("M.A.V.","Violación de menor de 14 años",8,"Rabat","bb33"),
-  S("J.A.V.","Abuso sexual (dos condenas)",27,"Silva","bb33",{sub:true,fd:"20 ago",f2:"rep5"}),
+  S("J.A.V.","Abuso sexual (dos condenas)",27,"Silva","bb33",{sub:true,fd:"20 ago",f2:"rep5",f3:"clinicJAV",g:"La justicia le había negado cinco veces la libertad condicional. La rebaja adelantó su salida al 5 de agosto de 2026."}),
   S("F.Q.V.","Abuso sexual de menor de 14 años",9,"Rabat","bb33"),
   S("G.G.J.","Abuso sexual de menor de 14 años",6,"Rabat","bb33"),
   S("G.R.R.","Violación y abuso sexual de menor de 14 años",30,"Mira","bb33",{sub:true,fd:"13 ago",f2:"rep6",f3:"bb29",g:"Gendarmería evaluó alto su riesgo de reincidencia. La Comisión de Libertad Condicional lo rechazó cinco veces entre 2024 y 2026; la comisión de rebaja no tuvo a la vista esos informes. BioBío informa una orden expresa de conceder la rebaja, pero el decreto no la invoca. Según Reportea, el fallo anuló su exclusión del beneficio por la comisión.",ori:"apelaciones"}),
@@ -487,7 +490,7 @@ const D = [
   {tipo:"drogas",q:"Soledad Chura Céspedes",delito:"Narcotráfico: detenida en la frontera norte o en una ruta que baja de ella",m:11,firma:"Rabat",fd:"10 jul",est:"sinconf",g:"Su nombre aparece en el decreto adjunto a la nota, no en el texto.",f:"uchDrogas"},
   {tipo:"drogas",q:"Sergio Saire Pozo",sub:true,delito:"Narcotráfico: detenido en la frontera norte o en una ruta que baja de ella",m:12,firma:"Silva",fd:"11 ago",est:"sinconf",g:"Su nombre aparece en el decreto adjunto a la nota, no en el texto.",f:"uchDrogas"},
   {tipo:"drogas",q:"Edixon Escobar García",delito:"Narcotráfico: 25,5 kilos de cannabis y dos de cocaína, al entrar por un paso no habilitado (2020)",m:6,firma:"Rabat",fd:"23 abr",est:"volvio",g:"Se le había negado la libertad condicional. El decreto fijó su salida para el día siguiente. El 30 de octubre quedó en prisión preventiva, otra vez por tráfico.",f:"iReinc"},
-  {tipo:"ddhh",q:"César Acuña Luengo",sub:true,delito:"Exagente de la CNI, secuestro calificado de cinco detenidos desaparecidos (1987)",m:19,firma:"Mira",fd:"20 may",est:"sinconf",g:"Cumplía en Colina I. El decreto movió el término de su condena del 2 de mayo de 2027 al 2 de octubre de 2025, una fecha ya pasada.",f:"bbCNI"}
+  {tipo:"ddhh",q:"César Acuña Luengo",sub:true,delito:"Exagente de la CNI, secuestro calificado de cinco detenidos desaparecidos (1987)",m:19,firma:"Mira",fd:"20 may",est:"libre",g:"Cumplía en Colina I. El decreto movió el término de su condena del 2 de mayo de 2027 al 2 de octubre de 2025, una fecha ya pasada, y le permitió salir en libertad. La Corte Suprema confirmó que no revisará la rebaja por la vía del amparo.",f:"bbCNI",f2:"megaCNI"}
 ];
 const SIN_IDENTIFICAR = 56 - D.filter(d=>d.tipo==="sexual").length;
 // Origen de la rebaja (solo delitos sexuales identificados). Fuente: BioBioChile, 3 nov 2026:
